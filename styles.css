@@ -1,52 +1,156 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
+:root {
+	--primary-color: #007aff; /* «яблочный» синий */
+	--text-color: #1d1d1f;
+	--background-color: #f5f5f7;
+	--card-background: #fff;
+	--shadow-color: rgba(0, 0, 0, 0.06);
+}
+
 body {
 	font-family: 'Inter', sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #f5f5f7;
-	color: #1d1d1f;
+	background-color: var(--background-color);
+	color: var(--text-color);
 }
 
-header {
-	text-align: center;
-	padding: 80px 20px;
-	background: #fff;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+/* Шапка (navbar) */
+.navbar {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	background: var(--card-background);
+	display: flex;
+	align-items: center;
+	justify-content: space-between; /* Логотип слева, бургер/меню справа */
+	padding: 10px 20px;
+	box-shadow: 0 0 4px var(--shadow-color);
+	z-index: 1000;
+	box-sizing: border-box;
 }
 
-h1 {
-	font-size: 2.5rem;
+.logo {
+	font-size: 1.5rem;
 	font-weight: 600;
 }
 
-p {
-	font-size: 1.2rem;
-	color: #666;
+/* Основное меню */
+.nav-links {
+	list-style: none;
+	display: flex;
+	gap: 20px;
+	transition: all 0.3s ease;
+	margin: 0; /* убираем лишние отступы */
 }
 
-main {
-	max-width: 800px;
-	margin: 40px auto;
-	padding: 20px;
+/* Ссылки меню */
+.nav-links li a {
+	text-decoration: none;
+	color: var(--text-color);
+	font-weight: 500;
+	padding: 8px 12px;
+	transition: color 0.3s;
+	white-space: nowrap; /* чтобы пункт не переносился по словам */
 }
 
-.category {
-	background: white;
-	padding: 20px;
-	border-radius: 12px;
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+.nav-links li a:hover {
+	color: var(--primary-color);
+}
+
+/* Кнопка гамбургер-меню */
+.menu-toggle {
+	display: none;
+	flex-direction: column;
+	cursor: pointer;
+}
+
+.menu-toggle .bar {
+	height: 3px;
+	width: 25px;
+	background-color: var(--text-color);
+	margin: 3px 0;
+	transition: all 0.3s ease;
+}
+
+/* Хедер */
+.site-header {
+	text-align: center;
+	padding: 100px 20px 60px;
+	margin-top: 60px; /* отступ под фиксированную шапку */
+}
+
+.site-header h1 {
+	font-size: 2.5rem;
+	font-weight: 600;
 	margin-bottom: 20px;
 }
 
-h2 {
-	font-size: 1.8rem;
-	color: #1d1d1f;
-	margin-bottom: 10px;
+.site-header p {
+	font-size: 1.2rem;
+	color: #666;
+	max-width: 600px;
+	margin: 0 auto;
 }
 
+/* Основное содержимое */
+main {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+/* Секции-карточки */
+.category {
+	background: var(--card-background);
+	border-radius: 14px;
+	box-shadow: 0 2px 6px var(--shadow-color);
+	margin-bottom: 24px;
+	padding: 20px 24px;
+}
+
+.category h2 {
+	font-size: 1.6rem;
+	margin-bottom: 16px;
+	color: var(--text-color);
+}
+
+/* Скрытый контент с анимацией по высоте */
+.hidden-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease;
+  overflow-anchor: none;
+}
+
+.hidden-content.open {
+  max-height: 2000px; /* Подберите значение, гарантирующее, что контент полностью раскроется */
+}
+
+/* Если у вас ранее был селектор .hidden-content.open с max-height, его можно удалить */
+
+/* Кнопка "Vis mer" / "Skjul" */
+.toggle-btn {
+	background: var(--primary-color);
+	color: #fff;
+	border: none;
+	padding: 10px 15px;
+	border-radius: 8px;
+	cursor: pointer;
+	font-size: 1rem;
+	margin-top: 15px;
+	transition: background 0.3s;
+}
+
+.toggle-btn:hover {
+	background: #005bb5;
+}
+
+/* Текстовые стили */
 .phrase {
-	font-size: 1.2rem;
+	font-size: 1.1rem;
 	font-weight: 600;
 	margin-top: 10px;
 }
@@ -55,13 +159,38 @@ h2 {
 	font-size: 1rem;
 	color: #555;
 	margin-left: 20px;
+	margin-bottom: 10px;
 }
 
-@media (max-width: 768px) {
-	h1 {
+/* Адаптация под мобильные экраны */
+@media (max-width: 900px) {
+	.menu-toggle {
+		display: flex;
+	}
+	.nav-links {
+		display: none; /* скрываем пункты, пока не кликнут на бургер */
+	}
+	.nav-links.active {
+		display: flex;
+		position: absolute;
+		top: 60px; /* чуть ниже шапки */
+		right: 20px;
+		flex-direction: column;
+		background: var(--card-background);
+		box-shadow: 0 2px 8px var(--shadow-color);
+		border-radius: 8px;
+		padding: 10px 20px;
+	}
+	.nav-links.active li {
+		margin: 10px 0;
+	}
+	.site-header {
+		margin-top: 70px; /* чуть больше, чтобы не перекрывался */
+	}
+	.site-header h1 {
 		font-size: 2rem;
 	}
-	h2 {
-		font-size: 1.5rem;
+	.category h2 {
+		font-size: 1.4rem;
 	}
 }
