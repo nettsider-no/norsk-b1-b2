@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
 :root {
-	--primary-color: #007aff; /* «яблочный» синий */
+	--primary-color: #007aff;
 	--text-color: #1d1d1f;
 	--background-color: #f5f5f7;
 	--card-background: #fff;
 	--shadow-color: rgba(0, 0, 0, 0.06);
+}
+
+/* Universell boksmodell */
+* {
+	box-sizing: border-box;
 }
 
 body {
@@ -16,7 +21,7 @@ body {
 	color: var(--text-color);
 }
 
-/* Шапка (navbar) */
+/* Navbar */
 .navbar {
 	position: fixed;
 	top: 0;
@@ -25,11 +30,10 @@ body {
 	background: var(--card-background);
 	display: flex;
 	align-items: center;
-	justify-content: space-between; /* Логотип слева, бургер/меню справа */
+	justify-content: space-between;
 	padding: 10px 20px;
 	box-shadow: 0 0 4px var(--shadow-color);
 	z-index: 1000;
-	box-sizing: border-box;
 }
 
 .logo {
@@ -37,34 +41,38 @@ body {
 	font-weight: 600;
 }
 
-/* Основное меню */
+/* Navigasjonslenker */
 .nav-links {
 	list-style: none;
 	display: flex;
 	gap: 20px;
-	transition: all 0.3s ease;
-	margin: 0; /* убираем лишние отступы */
+	margin: 0;
+	padding: 0;
 }
 
-/* Ссылки меню */
 .nav-links li a {
 	text-decoration: none;
 	color: var(--text-color);
 	font-weight: 500;
 	padding: 8px 12px;
 	transition: color 0.3s;
-	white-space: nowrap; /* чтобы пункт не переносился по словам */
+	white-space: nowrap;
 }
 
-.nav-links li a:hover {
+.nav-links li a:hover,
+.nav-links li a:focus {
 	color: var(--primary-color);
+	outline: none;
 }
 
-/* Кнопка гамбургер-меню */
+/* Mobilmeny-knapp */
 .menu-toggle {
 	display: none;
 	flex-direction: column;
+	background: none;
+	border: none;
 	cursor: pointer;
+	padding: 5px;
 }
 
 .menu-toggle .bar {
@@ -75,11 +83,11 @@ body {
 	transition: all 0.3s ease;
 }
 
-/* Хедер */
+/* Header */
 .site-header {
 	text-align: center;
 	padding: 100px 20px 60px;
-	margin-top: 60px; /* отступ под фиксированную шапку */
+	margin-top: 60px;
 }
 
 .site-header h1 {
@@ -95,14 +103,14 @@ body {
 	margin: 0 auto;
 }
 
-/* Основное содержимое */
+/* Hovedinnhold */
 main {
 	max-width: 800px;
 	margin: 0 auto;
 	padding: 20px;
 }
 
-/* Секции-карточки */
+/* Seksjonskort */
 .category {
 	background: var(--card-background);
 	border-radius: 14px;
@@ -111,27 +119,22 @@ main {
 	padding: 20px 24px;
 }
 
+/* Seksjonsoverskrifter */
 .category h2 {
 	font-size: 1.6rem;
 	margin-bottom: 16px;
 	color: var(--text-color);
 }
 
-/* Скрытый контент с анимацией по высоте */
+/* Skjult innhold for toggling */
 .hidden-content {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.5s ease;
-  overflow-anchor: none;
+	overflow: hidden;
+	transition: max-height 0.5s ease;
+	max-height: 0;
+	overflow-anchor: none;
 }
 
-.hidden-content.open {
-  max-height: 2000px; /* Подберите значение, гарантирующее, что контент полностью раскроется */
-}
-
-/* Если у вас ранее был селектор .hidden-content.open с max-height, его можно удалить */
-
-/* Кнопка "Vis mer" / "Skjul" */
+/* Toggling-knapp */
 .toggle-btn {
 	background: var(--primary-color);
 	color: #fff;
@@ -144,11 +147,13 @@ main {
 	transition: background 0.3s;
 }
 
-.toggle-btn:hover {
+.toggle-btn:hover,
+.toggle-btn:focus {
 	background: #005bb5;
+	outline: none;
 }
 
-/* Текстовые стили */
+/* Tekststiler */
 .phrase {
 	font-size: 1.1rem;
 	font-weight: 600;
@@ -162,34 +167,40 @@ main {
 	margin-bottom: 10px;
 }
 
-/* Адаптация под мобильные экраны */
+/* Responsivt design */
 @media (max-width: 900px) {
 	.menu-toggle {
 		display: flex;
 	}
+
 	.nav-links {
-		display: none; /* скрываем пункты, пока не кликнут на бургер */
-	}
-	.nav-links.active {
-		display: flex;
-		position: absolute;
-		top: 60px; /* чуть ниже шапки */
-		right: 20px;
+		display: none;
 		flex-direction: column;
+		position: absolute;
+		top: 60px;
+		right: 20px;
 		background: var(--card-background);
 		box-shadow: 0 2px 8px var(--shadow-color);
 		border-radius: 8px;
 		padding: 10px 20px;
 	}
-	.nav-links.active li {
+
+	.nav-links.active {
+		display: flex;
+	}
+
+	.nav-links li {
 		margin: 10px 0;
 	}
+
 	.site-header {
-		margin-top: 70px; /* чуть больше, чтобы не перекрывался */
+		margin-top: 70px;
 	}
+
 	.site-header h1 {
 		font-size: 2rem;
 	}
+
 	.category h2 {
 		font-size: 1.4rem;
 	}
