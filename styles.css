@@ -8,7 +8,7 @@
 	--shadow-color: rgba(0, 0, 0, 0.06);
 }
 
-/* Universell boksmodell */
+/* Универсальная модель коробки */
 * {
 	box-sizing: border-box;
 }
@@ -21,7 +21,7 @@ body {
 	color: var(--text-color);
 }
 
-/* Navbar */
+/* Навигационная панель */
 .navbar {
 	position: fixed;
 	top: 0;
@@ -41,7 +41,7 @@ body {
 	font-weight: 600;
 }
 
-/* Navigasjonslenker */
+/* Навигационные ссылки */
 .nav-links {
 	list-style: none;
 	display: flex;
@@ -65,7 +65,7 @@ body {
 	outline: none;
 }
 
-/* Mobilmeny-knapp */
+/* Кнопка мобильного меню */
 .menu-toggle {
 	display: none;
 	flex-direction: column;
@@ -83,7 +83,7 @@ body {
 	transition: all 0.3s ease;
 }
 
-/* Header */
+/* Заголовок страницы */
 .site-header {
 	text-align: center;
 	padding: 100px 20px 60px;
@@ -103,14 +103,63 @@ body {
 	margin: 0 auto;
 }
 
-/* Hovedinnhold */
+/* Основное содержимое */
+.hero {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 100vh;
+	padding: 0 20px;
+	background: linear-gradient(135deg, #ffffff, #f0f0f5);
+}
+
+.hero h1 {
+	font-size: 2.8rem;
+	margin: 0 0 20px;
+	font-weight: 600;
+}
+
+.hero p {
+	font-size: 1.2rem;
+	line-height: 1.5;
+	max-width: 600px;
+	margin: 0 0 30px;
+	color: #555;
+}
+
+/* Кнопки главного меню */
+.menu-buttons {
+	display: flex;
+	gap: 15px;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.menu-buttons a {
+	text-decoration: none;
+	background: var(--primary-color);
+	color: #fff;
+	padding: 12px 20px;
+	border-radius: 12px;
+	font-weight: 600;
+	transition: background 0.3s;
+	min-width: 120px;
+	text-align: center;
+}
+
+.menu-buttons a:hover {
+	background: #005bb5;
+}
+
 main {
 	max-width: 800px;
 	margin: 0 auto;
 	padding: 20px;
 }
 
-/* Seksjonskort */
+/* Секции */
 .category {
 	background: var(--card-background);
 	border-radius: 14px;
@@ -119,14 +168,14 @@ main {
 	padding: 20px 24px;
 }
 
-/* Seksjonsoverskrifter */
+/* Заголовки секций */
 .category h2 {
 	font-size: 1.6rem;
 	margin-bottom: 16px;
 	color: var(--text-color);
 }
 
-/* Skjult innhold for toggling */
+/* Скрытый контент */
 .hidden-content {
 	overflow: hidden;
 	transition: max-height 0.5s ease;
@@ -134,7 +183,7 @@ main {
 	overflow-anchor: none;
 }
 
-/* Toggling-knapp */
+/* Кнопка сворачивания/разворачивания */
 .toggle-btn {
 	background: var(--primary-color);
 	color: #fff;
@@ -153,7 +202,7 @@ main {
 	outline: none;
 }
 
-/* Tekststiler */
+/* Стили для текста */
 .phrase {
 	font-size: 1.1rem;
 	font-weight: 600;
@@ -167,12 +216,21 @@ main {
 	margin-bottom: 10px;
 }
 
-/* Responsivt design */
+/* Адаптивный дизайн */
 @media (max-width: 900px) {
+	.hero h1 {
+		font-size: 2.2rem;
+	}
+	.hero p {
+		font-size: 1rem;
+	}
+	.menu-buttons a {
+		padding: 10px 16px;
+		min-width: 100px;
+	}
 	.menu-toggle {
 		display: flex;
 	}
-
 	.nav-links {
 		display: none;
 		flex-direction: column;
@@ -184,23 +242,18 @@ main {
 		border-radius: 8px;
 		padding: 10px 20px;
 	}
-
 	.nav-links.active {
 		display: flex;
 	}
-
 	.nav-links li {
 		margin: 10px 0;
 	}
-
 	.site-header {
 		margin-top: 70px;
 	}
-
 	.site-header h1 {
 		font-size: 2rem;
 	}
-
 	.category h2 {
 		font-size: 1.4rem;
 	}

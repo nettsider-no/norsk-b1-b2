@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
 
-	// Инициализация анимации появления секций
+	// Анимация появления секций при прокрутке
 	const categories = document.querySelectorAll('.category')
 	categories.forEach(category => {
 		category.style.opacity = '0'
@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		category.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out'
 	})
 
-	// IntersectionObserver для плавного появления секций при скролле
 	const observer = new IntersectionObserver(
 		(entries, obs) => {
 			entries.forEach(entry => {
@@ -22,12 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		},
 		{ threshold: 0.1 }
 	)
+	categories.forEach(category => observer.observe(category))
 
-	categories.forEach(category => {
-		observer.observe(category)
-	})
-
-	// Тогглинг скрытого контента
+	// Функция для сворачивания/разворачивания скрытого контента
 	const toggleButtons = document.querySelectorAll('.toggle-btn')
 	toggleButtons.forEach(button => {
 		button.addEventListener('click', function () {
@@ -37,23 +33,21 @@ document.addEventListener('DOMContentLoaded', () => {
 					hiddenContent.style.maxHeight &&
 					hiddenContent.style.maxHeight !== '0px'
 				) {
-					// Закрываем секцию
 					hiddenContent.style.maxHeight = '0'
-					this.textContent = 'Vis mer'
+					this.textContent = 'Показать больше'
 					this.blur()
 				} else {
-					// Открываем секцию – устанавливаем высоту равной реальной высоте содержимого
 					hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
-					this.textContent = 'Skjul'
+					this.textContent = 'Скрыть'
 				}
 			}
 		})
 	})
 
-	// Тогглинг мобильного меню
+	// Toggle для мобильного меню
 	const menuToggle = document.getElementById('mobile-menu')
 	const navLinks = document.querySelector('.nav-links')
-	menuToggle.addEventListener('click', () => {
+	menuToggle.addEventListener('click', () =>
 		navLinks.classList.toggle('active')
-	})
+	)
 })
