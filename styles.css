@@ -21,6 +21,11 @@ body {
 	color: var(--text-color);
 }
 
+a {
+	color: var(--text-color);
+	text-decoration: none;
+}
+
 /* Навигационная панель */
 .navbar {
 	position: fixed;
@@ -214,6 +219,100 @@ main {
 	color: #555;
 	margin-left: 20px;
 	margin-bottom: 10px;
+}
+
+.examples-container {
+	max-width: 800px;
+	margin: 100px auto 50px;
+	padding: 20px;
+	text-align: center;
+}
+.examples-container h1 {
+	font-size: 2.8rem;
+	margin-bottom: 20px;
+	font-weight: 600;
+}
+.examples-container p {
+	font-size: 1.1rem;
+	color: #555;
+	margin-bottom: 30px;
+}
+.examples-menu {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+}
+.example-card {
+	background: var(--card-background);
+	border-radius: 12px;
+	box-shadow: 0 2px 6px var(--shadow-color);
+	padding: 20px;
+	width: 220px;
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.3s, box-shadow 0.3s;
+}
+.example-card:hover {
+	transform: translateY(-5px);
+	box-shadow: 0 4px 12px var(--shadow-color);
+}
+.example-card h3 {
+	margin-top: 0;
+	font-size: 1.5rem;
+	color: var(--primary-color);
+}
+.example-card p {
+	font-size: 0.95rem;
+	color: #555;
+	margin: 10px 0 15px;
+	flex-grow: 1;
+}
+.example-card a {
+	text-decoration: none;
+	background: var(--primary-color);
+	color: #fff;
+	padding: 10px 15px;
+	border-radius: 8px;
+	font-weight: 600;
+	transition: background 0.3s;
+	margin-top: auto;
+	display: inline-block;
+}
+.example-card a:hover {
+	background: #005bb5;
+}
+
+.synonyms-container {
+	max-width: 800px;
+	margin: 100px auto;
+	padding: 20px;
+	background: var(--card-background);
+	border-radius: 12px;
+	box-shadow: 0 2px 6px var(--shadow-color);
+}
+.synonyms-container h1 {
+	text-align: center;
+	font-size: 2.8rem;
+	margin-bottom: 20px;
+	color: var(--primary-color);
+}
+.synonyms-container ol {
+	padding-left: 20px;
+}
+.synonyms-container li {
+	margin-bottom: 20px;
+	text-align: left;
+	line-height: 1.6;
+}
+.synonyms-container li strong {
+	display: block;
+	font-size: 1.1rem;
+	margin-bottom: 5px;
+}
+.synonyms-container li em {
+	font-style: normal;
+	color: #555;
 }
 
 /* Адаптивный дизайн */

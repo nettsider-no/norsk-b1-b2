@@ -34,11 +34,11 @@ document.addEventListener('DOMContentLoaded', () => {
 					hiddenContent.style.maxHeight !== '0px'
 				) {
 					hiddenContent.style.maxHeight = '0'
-					this.textContent = 'Vis mer'
+					this.textContent = 'Показать больше'
 					this.blur()
 				} else {
 					hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
-					this.textContent = 'Skjul'
+					this.textContent = 'Скрыть'
 				}
 			}
 		})
