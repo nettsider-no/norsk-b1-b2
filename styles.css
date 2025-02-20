@@ -91,7 +91,7 @@ a {
 /* Заголовок страницы */
 .site-header {
 	text-align: center;
-	padding: 100px 20px 60px;
+	padding: 100px 20px 50px;
 	margin-top: 60px;
 }
 
@@ -176,8 +176,8 @@ main {
 /* Заголовки секций */
 .category h2 {
 	font-size: 1.6rem;
-	margin-bottom: 16px;
-	color: var(--text-color);
+	margin-bottom: 60px;
+	color: var(--primary-color);
 }
 
 /* Скрытый контент */
@@ -186,6 +186,40 @@ main {
 	transition: max-height 0.5s ease;
 	max-height: 0;
 	overflow-anchor: none;
+}
+
+.hidden-content.open {
+	background-color: #fafafa;
+	padding: 10px 15px;
+	border-radius: 8px;
+	max-height: 2000px; /* большое значение, чтобы влез весь текст */
+	transition: max-height 0.5s ease;
+}
+
+.hidden-content p,
+.hidden-content ul,
+.hidden-content li {
+	margin-bottom: 1em; /* Отступ снизу между абзацами и элементами списков */
+	line-height: 1.6; /* Увеличенный интерлиньяж для удобочитаемости */
+}
+
+.sub-section {
+	margin-bottom: 40px; /* Добавляем отступ между статьями */
+}
+
+.sub-section h3 {
+	margin-top: 0;
+	font-size: 1.4rem; /* Чуть меньше, чем h2, но всё ещё заметно */
+	margin-bottom: 10px; /* Отступ снизу, чтобы текст не прилипал */
+	border-left: 4px solid var(--primary-color);
+	padding-left: 10px; /* Вертикальная полоса слева для акцента */
+}
+
+.sub-section h4 {
+	font-size: 1.2rem;
+	margin-top: 1em;
+	margin-bottom: 0.5em;
+	color: #333;
 }
 
 /* Кнопка сворачивания/разворачивания */
