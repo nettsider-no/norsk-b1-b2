@@ -46,13 +46,20 @@ a {
 	font-weight: 600;
 }
 
+.line-break {
+	display: inline;
+}
+
+.logo a {
+	text-decoration: none;
+	color: var(--text-color);
+}
+
 /* Навигационные ссылки */
 .nav-links {
 	list-style: none;
 	display: flex;
 	gap: 20px;
-	margin: 0;
-	padding: 0;
 }
 
 .nav-links li a {
@@ -61,7 +68,7 @@ a {
 	font-weight: 500;
 	padding: 8px 12px;
 	transition: color 0.3s;
-	white-space: nowrap;
+	white-space: nowrap; /* чтобы не переносило текст */
 }
 
 .nav-links li a:hover,
@@ -72,7 +79,7 @@ a {
 
 /* Кнопка мобильного меню */
 .menu-toggle {
-	display: none;
+	display: none; /* Скрыто по умолчанию, показываем в @media */
 	flex-direction: column;
 	background: none;
 	border: none;
@@ -91,7 +98,7 @@ a {
 /* Заголовок страницы */
 .site-header {
 	text-align: center;
-	padding: 100px 20px 50px;
+	padding: 100px 20px 30px;
 	margin-top: 60px;
 }
 
@@ -126,6 +133,16 @@ a {
 	font-weight: 600;
 }
 
+/* Дополнительное оформление hero.h1 для экранов от ~480 до 600px */
+@media (max-width: 600px) and (min-width: 481px) {
+	.hero h1 {
+		font-size: 2.2rem;
+		line-height: 1.3;
+		width: 90%;
+		margin: 0 auto 20px;
+	}
+}
+
 .hero p {
 	font-size: 1.2rem;
 	line-height: 1.5;
@@ -158,8 +175,10 @@ a {
 	background: #005bb5;
 }
 
+/* Основной контейнер */
 main {
-	max-width: 800px;
+	width: 90%;
+	max-width: 1200px;
 	margin: 0 auto;
 	padding: 20px;
 }
@@ -219,10 +238,15 @@ main {
 	font-size: 1.2rem;
 	margin-top: 1em;
 	margin-bottom: 0.5em;
-	color: #333;
+	color: var(--primary-color);
 }
 
-/* Кнопка сворачивания/разворачивания */
+.sub-section em {
+	font-weight: 600;
+	color: #1d1d1d;
+}
+
+/* Кнопка сворачивания/разворачивания (Показать больше) */
 .toggle-btn {
 	background: var(--primary-color);
 	color: #fff;
@@ -255,8 +279,10 @@ main {
 	margin-bottom: 10px;
 }
 
+/* Контейнер для примеров текстов */
 .examples-container {
-	max-width: 800px;
+	width: 90%;
+	max-width: 1000px;
 	margin: 100px auto 50px;
 	padding: 20px;
 	text-align: center;
@@ -282,7 +308,8 @@ main {
 	border-radius: 12px;
 	box-shadow: 0 2px 6px var(--shadow-color);
 	padding: 20px;
-	width: 220px;
+	width: 100%;
+	max-width: 260px;
 	display: flex;
 	flex-direction: column;
 	transition: transform 0.3s, box-shadow 0.3s;
@@ -296,7 +323,12 @@ main {
 	font-size: 1.5rem;
 	color: var(--primary-color);
 }
-.example-card p {
+
+.card-bottom {
+	margin-top: auto;
+}
+
+.card-bottom p {
 	font-size: 0.95rem;
 	color: #555;
 	margin: 10px 0 15px;
@@ -310,15 +342,16 @@ main {
 	border-radius: 8px;
 	font-weight: 600;
 	transition: background 0.3s;
-	margin-top: auto;
-	display: inline-block;
+	display: block;
+	text-align: center;
+	width: 100%;
 }
 .example-card a:hover {
 	background: #005bb5;
 }
 
+/* Контейнер синонимов */
 .synonyms-container {
-	max-width: 800px;
 	margin: 100px auto;
 	padding: 20px;
 	background: var(--card-background);
@@ -349,7 +382,101 @@ main {
 	color: #555;
 }
 
+/* Контейнер образцов текстов */
+.ex-container {
+	width: 90%;
+	max-width: 1000px;
+	margin: 50px auto 50px;
+	padding: 20px;
+	background: var(--card-background);
+	border-radius: 12px;
+	box-shadow: 0 2px 6px var(--shadow-color);
+	text-align: center;
+}
+.ex-container h1 {
+	font-size: 2.8rem;
+	margin-bottom: 30px;
+	color: var(--primary-color);
+}
+.ex-entry {
+	margin-bottom: 40px;
+	padding-bottom: 20px;
+	text-align: left;
+}
+.ex-entry:last-child {
+	border-bottom: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
+}
+.ex-title {
+	font-size: 1.8rem;
+	margin-bottom: 10px;
+}
+.ex-body {
+	font-size: 1.1rem;
+	line-height: 1.6;
+	margin-bottom: 15px;
+	color: #333;
+}
+.ex-translation {
+	font-size: 0.95rem;
+	color: #777;
+	margin-top: 10px;
+	border-top: 1px dashed #ccc;
+	padding-top: 10px;
+}
+
 /* Адаптивный дизайн */
+
+/* При ширине от 1102px до 1131px делаем перенос в логотипе */
+@media (min-width: 1102px) and (max-width: 1131px) {
+	.line-break {
+		display: block;
+	}
+}
+
+/* Корректируем навигацию и логотип для экранов до 1200px */
+@media (max-width: 1200px) {
+	.nav-links li a {
+		padding: 6px 8px;
+		font-size: 1rem;
+	}
+	.logo {
+		font-size: 1.3rem;
+	}
+}
+
+/* Меню для устройств с шириной до 1070px */
+@media (max-width: 1070px) {
+	.menu-toggle {
+		display: flex; /* Показываем гамбургер */
+	}
+	.nav-links {
+		display: none; /* Скрываем список ссылок */
+		flex-direction: column; /* Колонкой */
+		position: absolute; /* Абсолютное позиционирование */
+		top: 60px; /* Ниже шапки */
+		right: 20px;
+		background: var(--card-background);
+		box-shadow: 0 2px 8px var(--shadow-color);
+		border-radius: 8px;
+		padding: 10px 20px;
+		gap: 15px;
+	}
+	/* Когда класс .active добавлен — показываем список */
+	.nav-links.active {
+		display: flex;
+	}
+	/* Стили для элементов списка в мобильном меню */
+	.nav-links li {
+		margin: 10px 0;
+	}
+	.logo {
+		font-size: 1.5rem;
+	}
+}
+
+/* Для экранов до 900px корректируем размеры заголовков и кнопок */
 @media (max-width: 900px) {
 	.hero h1 {
 		font-size: 2.2rem;
@@ -361,26 +488,7 @@ main {
 		padding: 10px 16px;
 		min-width: 100px;
 	}
-	.menu-toggle {
-		display: flex;
-	}
-	.nav-links {
-		display: none;
-		flex-direction: column;
-		position: absolute;
-		top: 60px;
-		right: 20px;
-		background: var(--card-background);
-		box-shadow: 0 2px 8px var(--shadow-color);
-		border-radius: 8px;
-		padding: 10px 20px;
-	}
-	.nav-links.active {
-		display: flex;
-	}
-	.nav-links li {
-		margin: 10px 0;
-	}
+	/* Чтобы шапка не перекрывала контент */
 	.site-header {
 		margin-top: 70px;
 	}
@@ -389,5 +497,185 @@ main {
 	}
 	.category h2 {
 		font-size: 1.4rem;
+	}
+}
+
+/* Для экранов до 700px корректируем навигацию и логотип */
+@media (max-width: 700px) {
+	.nav-links {
+		right: 10px; /* уменьшаем отступ справа */
+		padding: 10px 15px; /* уменьшаем внутренние отступы */
+		gap: 10px;
+	}
+	.nav-links li a {
+		padding: 6px 8px;
+		font-size: 0.9rem;
+	}
+	.logo {
+		font-size: 1.3rem;
+	}
+}
+
+/* Для экранов до 600px корректируем размеры логотипа, навигации, образцов и кнопки "Показать больше" */
+@media (max-width: 600px) {
+	.logo {
+		font-size: 1.3rem;
+	}
+	.nav-links li a {
+		font-size: 0.95rem;
+		padding: 6px 10px;
+	}
+
+	.hero h1 {
+		width: 100%;
+		align-self: stretch;
+	}
+
+	.menu-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+  .menu-buttons a {
+    width: 100%;
+		padding: 14px 20px;
+		max-width: 350px;
+  }
+
+	.ex-container h1 {
+		font-size: 2.2rem;
+	}
+	.ex-title {
+		font-size: 1.5rem;
+	}
+	.ex-body {
+		font-size: 1rem;
+	}
+	/* Для кнопки "Показать больше" адаптация для узких экранов */
+	.toggle-btn {
+		width: 100%;
+		box-sizing: border-box;
+	}
+	/* Расширяем карточки с примерами текстов для маленьких экранов */
+	.example-card {
+		width: 90%;
+		max-width: none;
+	}
+}
+
+/* Дополнительный адаптив для ультрасужих устройств (до 480px) */
+@media (max-width: 480px) {
+	.navbar {
+		padding: 8px 10px;
+	}
+	.nav-links li a {
+		padding: 4px 6px;
+		font-size: 0.85rem;
+	}
+	.logo {
+		font-size: 1.2rem;
+	}
+	.site-header {
+		padding: 80px 10px 20px;
+	}
+	.site-header h1 {
+		font-size: 2rem;
+	}
+	.site-header p {
+		font-size: 1rem;
+	}
+	.hero h1 {
+		font-size: 2rem;
+	}
+	.hero p {
+		font-size: 0.95rem;
+	}
+	.menu-buttons a {
+		padding: 8px 12px;
+		font-size: 0.9rem;
+		min-width: 90px;
+	}
+	main {
+		padding: 10px;
+	}
+	.examples-container h1 {
+		font-size: 2.4rem;
+	}
+	.examples-container p {
+		font-size: 1rem;
+	}
+	.example-card {
+		width: 90%;
+		max-width: none;
+		padding: 15px;
+	}
+	.example-card h3 {
+		font-size: 1.3rem;
+	}
+	.card-bottom p {
+		font-size: 0.9rem;
+	}
+	.synonyms-container h1 {
+		font-size: 2.4rem;
+	}
+	.ex-container h1 {
+		font-size: 2.4rem;
+	}
+	.ex-title {
+		font-size: 1.6rem;
+	}
+	.ex-body {
+		font-size: 1rem;
+	}
+}
+
+/* Дополнительный адаптив для больших экранов (от 1400px) */
+@media (min-width: 1400px) {
+	.site-header h1 {
+		font-size: 3rem;
+	}
+	.site-header p {
+		font-size: 1.4rem;
+	}
+	.hero h1 {
+		font-size: 3rem;
+	}
+	.hero p {
+		font-size: 1.4rem;
+	}
+	.menu-buttons a {
+		padding: 15px 25px;
+		min-width: 140px;
+	}
+	main {
+		padding: 30px;
+	}
+	.examples-container h1 {
+		font-size: 3rem;
+	}
+	.examples-container p {
+		font-size: 1.3rem;
+	}
+	.example-card {
+		max-width: 280px;
+		padding: 25px;
+	}
+	.example-card h3 {
+		font-size: 1.8rem;
+	}
+	.card-bottom p {
+		font-size: 1.1rem;
+	}
+	.synonyms-container h1 {
+		font-size: 3rem;
+	}
+	.ex-container h1 {
+		font-size: 3rem;
+	}
+	.ex-title {
+		font-size: 2rem;
+	}
+	.ex-body {
+		font-size: 1.2rem;
 	}
 }
