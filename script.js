@@ -23,9 +23,18 @@ document.addEventListener('DOMContentLoaded', () => {
 	)
 	categories.forEach(category => observer.observe(category))
 
-	// Функция для сворачивания/разворачивания скрытого контента
+	// Функция для сворачивания/разворачивания скрытого контента с сохранением состояния
 	const toggleButtons = document.querySelectorAll('.toggle-btn')
-	toggleButtons.forEach(button => {
+	toggleButtons.forEach((button, index) => {
+		// Восстановление состояния при загрузке страницы
+		if (sessionStorage.getItem('toggleState-' + index) === 'expanded') {
+			const hiddenContent = button.previousElementSibling
+			if (hiddenContent) {
+				hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
+				button.textContent = 'Скрыть'
+			}
+		}
+
 		button.addEventListener('click', function () {
 			const hiddenContent = this.previousElementSibling
 			if (hiddenContent) {
@@ -35,10 +44,12 @@ document.addEventListener('DOMContentLoaded', () => {
 				) {
 					hiddenContent.style.maxHeight = '0'
 					this.textContent = 'Показать больше'
+					sessionStorage.setItem('toggleState-' + index, 'collapsed')
 					this.blur()
 				} else {
 					hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
 					this.textContent = 'Скрыть'
+					sessionStorage.setItem('toggleState-' + index, 'expanded')
 				}
 			}
 		})
@@ -50,4 +61,19 @@ document.addEventListener('DOMContentLoaded', () => {
 	menuToggle.addEventListener('click', () =>
 		navLinks.classList.toggle('active')
 	)
+
+	// Сохранение позиции прокрутки при клике на Lightbox-ссылки
+	let storedScroll = 0
+	document.querySelectorAll('a[data-lightbox]').forEach(anchor => {
+		anchor.addEventListener('click', () => {
+			storedScroll = window.pageYOffset
+		})
+	})
+
+	// Восстановление позиции прокрутки, когда hash очищается (Lightbox закрыт)
+	window.addEventListener('hashchange', () => {
+		if (!location.hash) {
+			window.scrollTo({ top: storedScroll, behavior: 'smooth' })
+		}
+	})
 })
