@@ -532,15 +532,15 @@ main {
 	}
 
 	.menu-buttons {
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-  }
-  .menu-buttons a {
-    width: 100%;
+		flex-direction: column;
+		align-items: center;
+		gap: 14px;
+	}
+	.menu-buttons a {
+		width: 100%;
 		padding: 14px 20px;
 		max-width: 350px;
-  }
+	}
 
 	.ex-container h1 {
 		font-size: 2.2rem;
@@ -677,4 +677,10 @@ main {
 	.ex-body {
 		font-size: 1.2rem;
 	}
+}
+
+.lb-image img {
+	max-width: 100% !important;
+	max-height: 100% !important;
+	object-fit: cover; /* или contain */
 }
