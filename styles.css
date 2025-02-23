@@ -21,19 +21,21 @@ body {
 	font-family: 'Inter', sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: var(--background-color);
 	color: var(--text-color);
+	background: url('images/bg.png') no-repeat center center/cover;
+	background-attachment: fixed; /* Эффект параллакса на десктопе */
 }
 
-.background {
-	position: absolute;
-	display: block;
+body::before {
+	content: '';
+	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: 0;
-	background: #f5f5f7; /* или другой нужный цвет */
+	background: rgba(0, 0, 0, 0.38); /* Чуть более тёмный, чем 0.3 */
+	pointer-events: none;
+	z-index: -1;
 }
 
 a {
@@ -124,8 +126,9 @@ a {
 }
 
 .site-header p {
+	color: #fff;
+	opacity: 0.9;
 	font-size: 1.2rem;
-	color: #666;
 	max-width: 600px;
 	margin: 0 auto;
 }
@@ -137,20 +140,18 @@ a {
 	justify-content: center;
 	align-items: center;
 	text-align: center;
-	height: 100vh;
 	padding: 0 20px;
-	background: linear-gradient(135deg, #ffffff, #f0f0f5);
-}
-
-.hero h1,
-.hero p {
-	animation: fadeInUp 0.6s forwards;
+	position: relative;
+	min-height: 100vh;
 }
 
 .hero h1 {
-	font-size: 2.8rem;
+	position: relative;
+	font-size: 3.9rem;
 	margin: 0 0 20px;
 	font-weight: 600;
+	/* Лёгкая тень для контраста */
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
 /* Дополнительное оформление hero.h1 для экранов от ~480 до 600px */
@@ -164,11 +165,10 @@ a {
 }
 
 .hero p {
-	font-size: 1.2rem;
+	font-size: 1.4rem;
 	line-height: 1.5;
 	max-width: 600px;
 	margin: 0 0 30px;
-	color: #555;
 }
 
 /* Кнопки главного меню */
@@ -184,15 +184,16 @@ a {
 	background: var(--primary-color);
 	color: #fff;
 	padding: 12px 20px;
-	border-radius: 12px;
+	border-radius: 18px; /* более округлённая форма */
 	font-weight: 600;
 	transition: 0.3s;
 	min-width: 120px;
 	text-align: center;
+	/* Эффект плавного появления */
 	opacity: 0;
 	transform: translateY(20px);
 	animation: fadeInUp 0.6s forwards;
-	animation-delay: 0.5s; /* настройте задержку по вкусу */
+	animation-delay: 0.5s;
 }
 
 @keyframes fadeInUp {
@@ -204,8 +205,8 @@ a {
 
 .menu-buttons a:hover {
 	background: #005bb5;
-	transform: translateY(3px);
-	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	transform: translateY(-2px);
+	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 	transition: transform 0.3s, box-shadow 0.3s;
 }
 
@@ -329,10 +330,13 @@ main {
 	margin-bottom: 20px;
 	font-weight: 600;
 }
+
 .examples-container p {
 	font-size: 1.1rem;
-	color: #555;
+	margin-top: 0;
 	margin-bottom: 30px;
+	color: #fff;
+	opacity: 0.9;
 }
 .examples-menu {
 	display: flex;
@@ -423,7 +427,7 @@ main {
 .ex-container {
 	width: 90%;
 	max-width: 1000px;
-	margin: 50px auto 50px;
+	margin: 0px auto 50px;
 	padding: 20px;
 	background: var(--card-background);
 	border-radius: 12px;
@@ -516,10 +520,10 @@ main {
 /* Для экранов до 900px корректируем размеры заголовков и кнопок */
 @media (max-width: 900px) {
 	.hero h1 {
-		font-size: 2.2rem;
+		font-size: 3.6rem;
 	}
 	.hero p {
-		font-size: 1rem;
+		font-size: 1.3rem;
 	}
 	.menu-buttons a {
 		padding: 10px 16px;
@@ -534,6 +538,12 @@ main {
 	}
 	.category h2 {
 		font-size: 1.4rem;
+	}
+}
+
+@media (max-width: 768px) {
+	body {
+		background-attachment: scroll;
 	}
 }
 
@@ -575,7 +585,12 @@ main {
 
 	.hero h1 {
 		width: 100%;
+		font-size: 2.8rem;
 		align-self: stretch;
+	}
+
+	.hero p {
+		font-size: 1.1rem;
 	}
 
 	.menu-buttons {
@@ -585,8 +600,8 @@ main {
 	}
 	.menu-buttons a {
 		width: 100%;
-		padding: 14px 20px;
-		max-width: 350px;
+		padding: 12px 20px;
+		min-width: 120px;
 	}
 
 	main {
@@ -693,7 +708,7 @@ main {
 		font-size: 1.4rem;
 	}
 	.hero h1 {
-		font-size: 3rem;
+		font-size: 5rem;
 	}
 	.hero p {
 		font-size: 1.4rem;
@@ -740,4 +755,19 @@ main {
 	min-height: 500px !important;
 	max-height: 100% !important;
 	object-fit: cover; /* или contain */
+}
+
+h1.animate__animated.animate__fadeInDown,
+h1.animate__animated.animate__fadeInDown {
+	color: #fff !important;
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4) !important;
+}
+
+h1.animate__animated.animate__fadeInDown.sinonims {
+	color: var(--primary-color) !important;
+}
+
+p.animate__animated.animate__fadeInDown {
+	color: #fff !important;
+	opacity: 0.9 !important;
 }

@@ -76,4 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
 			window.scrollTo({ top: storedScroll, behavior: 'smooth' })
 		}
 	})
+
+	// Mousemove параллакс-эффект для фона:
+	document.addEventListener('mousemove', function (e) {
+		// Получаем координаты мыши
+		const x = e.clientX
+		const y = e.clientY
+
+		// Вычисляем смещение: базовая позиция 50%, смещение ±5%
+		const moveX = 50 + (x / window.innerWidth - 0.5) * 12
+		const moveY = 50 + (y / window.innerHeight - 0.5) * 12
+
+		// Применяем новое положение фона к body
+		document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
+	})
 })
