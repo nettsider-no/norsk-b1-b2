@@ -58,9 +58,22 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Toggle для мобильного меню
 	const menuToggle = document.getElementById('mobile-menu')
 	const navLinks = document.querySelector('.nav-links')
-	menuToggle.addEventListener('click', () =>
+	menuToggle.addEventListener('click', () => {
 		navLinks.classList.toggle('active')
-	)
+	})
+
+	// Обработка выпадающего меню для мобильной версии
+	const dropdowns = document.querySelectorAll('.dropdown')
+	dropdowns.forEach(dropdown => {
+		const toggleLink = dropdown.querySelector('.dropdown-toggle')
+		if (toggleLink) {
+			toggleLink.addEventListener('click', e => {
+				e.preventDefault() // предотвращаем переход по ссылке
+				dropdown.classList.toggle('open')
+				e.currentTarget.blur()
+			})
+		}
+	})
 
 	// Сохранение позиции прокрутки при клике на Lightbox-ссылки
 	let storedScroll = 0
@@ -77,17 +90,19 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// Mousemove параллакс-эффект для фона:
-	document.addEventListener('mousemove', function (e) {
-		// Получаем координаты мыши
-		const x = e.clientX
-		const y = e.clientY
+	// Mousemove параллакс-эффект для фона (с задержкой 1.8 сек)
+	setTimeout(() => {
+		document.addEventListener('mousemove', function (e) {
+			// Получаем координаты мыши
+			const x = e.clientX
+			const y = e.clientY
 
-		// Вычисляем смещение: базовая позиция 50%, смещение ±5%
-		const moveX = 50 + (x / window.innerWidth - 0.5) * 12
-		const moveY = 50 + (y / window.innerHeight - 0.5) * 12
+			// Вычисляем смещение: базовая позиция 50%, смещение ±7.5% (настроено через множитель 11)
+			const moveX = 50 + (x / window.innerWidth - 0.5) * 11
+			const moveY = 50 + (y / window.innerHeight - 0.5) * 11
 
-		// Применяем новое положение фона к body
-		document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
-	})
+			// Применяем новое положение фона к body
+			document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
+		})
+	}, 1800)
 })

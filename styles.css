@@ -24,6 +24,7 @@ body {
 	color: var(--text-color);
 	background: url('images/bg.png') no-repeat center center/cover;
 	background-attachment: fixed; /* Эффект параллакса на десктопе */
+	transition: background-position 0.4s ease-out;
 }
 
 body::before {
@@ -110,6 +111,60 @@ a {
 	background-color: var(--text-color);
 	margin: 3px 0;
 	transition: all 0.3s ease;
+}
+
+.dropdown {
+	position: relative;
+}
+.nav-links li .dropdown-toggle {
+	position: relative;
+	padding-right: 26px;
+	cursor: pointer; /* Показываем, что это «кликабельный» элемент */
+}
+a.dropdown-toggle::after {
+	position: absolute;
+	top: calc(50% - 14px);
+	right: 0;
+	content: '🔽';
+	width: 20px;
+	height: 20px;
+	color: currentColor;
+}
+.dropdown-menu {
+	position: absolute;
+	top: 130%;
+	left: 0;
+	background: var(--card-background);
+	box-shadow: 0 2px 6px var(--shadow-color);
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	min-width: 180px;
+	padding: 0;
+	margin: 0;
+	opacity: 0;
+	transform: translateY(-10px);
+	pointer-events: none;
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.dropdown-menu li {
+	list-style: none;
+}
+.dropdown-menu li a {
+	display: block;
+	padding: 12px 17px;
+	color: var(--text-color);
+	white-space: nowrap;
+	transition: color 0.3s ease;
+}
+/* .dropdown-menu li a:hover {
+	color: var(--primary-color);
+} */
+
+/* Когда .open добавлен к .dropdown, подменю показывается */
+.dropdown.open .dropdown-menu {
+	opacity: 1;
+	transform: translateY(0);
+	pointer-events: auto;
 }
 
 /* Заголовок страницы */
@@ -485,36 +540,115 @@ main {
 	.logo {
 		font-size: 1.3rem;
 	}
+	.dropdown-menu li a {
+		padding: 12px 17px;
+	}
 }
 
 /* Меню для устройств с шириной до 1070px */
-@media (max-width: 1070px) {
+@media (max-width: 1100px) {
+	/* Кнопка мобильного меню */
 	.menu-toggle {
 		display: flex; /* Показываем гамбургер */
+		flex-direction: column;
+		background: none;
+		border: none;
+		cursor: pointer;
+		padding: 5px;
 	}
+	.menu-toggle .bar {
+		height: 3px;
+		width: 25px;
+		background-color: var(--text-color);
+		margin: 3px 0;
+		transition: all 0.3s ease;
+	}
+
+	/* Базовые стили для nav-links в мобильном режиме */
 	.nav-links {
-		display: none; /* Скрываем список ссылок */
-		flex-direction: column; /* Колонкой */
-		position: absolute; /* Абсолютное позиционирование */
-		top: 60px; /* Ниже шапки */
-		right: 20px;
+		/* Скрываем меню через max-height и прозрачность (вместо display:none) */
+		position: absolute;
+		top: 60px; /* Ниже navbar */
+		right: 0;
 		background: var(--card-background);
 		box-shadow: 0 2px 8px var(--shadow-color);
 		border-radius: 8px;
 		padding: 10px 20px;
 		gap: 15px;
+
+		/* Переход для плавного раскрытия */
+		max-height: 0;
+		opacity: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease, opacity 0.3s ease;
+
+		/* Вертикальное расположение */
+		flex-direction: column;
+		align-items: flex-start;
 	}
-	/* Когда класс .active добавлен — показываем список */
+
+	/* Когда класс .active добавлен (при нажатии на бургер) — меню раскрывается */
 	.nav-links.active {
-		display: flex;
+		max-height: 600px; /* Достаточно большое значение для всех пунктов */
+		opacity: 1;
+		right: 10px; /* Отступ справа */
 	}
+
 	/* Стили для элементов списка в мобильном меню */
 	.nav-links li {
 		margin: 10px 0;
 	}
+
+	/* Логотип */
 	.logo {
 		font-size: 1.5rem;
+		font-weight: 600;
 	}
+
+	/* Пункт меню с подменю */
+	.nav-links li.dropdown {
+		position: relative;
+		width: 100%;
+	}
+
+	/* Скрываем подменю по умолчанию */
+	.nav-links li.dropdown .dropdown-menu {
+		/* position: static;
+		opacity: 0;
+		transform: translateY(-10px);
+		pointer-events: none;
+		transition: opacity 0.3s ease, transform 0.3s ease;
+		width: 100%;
+		padding-left: 15px;  Отступ для визуальной вложенности 
+		margin: 0; */
+		display: none;
+		position: static;
+		margin-top: 5px;
+		padding: 0;
+	}
+
+	.nav-links li.dropdown.open {
+		margin-bottom: 0px;
+	}
+
+	/* Когда к родительскому <li> добавлен класс .open — подменю раскрывается */
+	.nav-links li.dropdown.open .dropdown-menu {
+		display: block;
+	}
+
+	/* Внешний вид ссылок в подменю */
+	.nav-links li.dropdown .dropdown-menu li a {
+		display: block;
+		padding: 8px 15px;
+		color: var(--text-color);
+		white-space: nowrap;
+		transition: background 0.3s ease;
+	}
+	.nav-links li.dropdown .dropdown-menu li a:hover {
+		color: var(--primary-color);
+	}
+
+	/* Добавляем стрелку ▼ к пункту, у которого есть подменю */
 }
 
 /* Для экранов до 900px корректируем размеры заголовков и кнопок */

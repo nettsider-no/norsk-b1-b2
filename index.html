@@ -5,6 +5,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Forbered deg til Norskprøve</title>
 		<link rel="stylesheet" href="styles.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
 		<!-- Вы можете добавить свой favicon и метатеги -->
 	</head>
 	<body>
@@ -19,13 +23,23 @@
 				<span class="bar"></span>
 			</button>
 			<ul class="nav-links">
-				<li>
-					<a href="index.html" style="color: var(--primary-color)">Главная</a>
-				</li>
+				<li><a href="index.html">Главная</a></li>
 				<li><a href="uttrykk.html">Полезные выражения</a></li>
 				<li><a href="synonymer.html">Синонимы</a></li>
 				<li><a href="skrivetips.html">Советы по письму</a></li>
-				<li><a href="eksempler.html">Образцы текстов</a></li>
+
+				<!-- Пункт меню с подменю -->
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle">Образцы текстов</a>
+					<ul class="dropdown-menu">
+						<li><a href="tekster/saktekst.html">Saktekst</a></li>
+						<li><a href="tekster/email.html">Email</a></li>
+						<li><a href="tekster/klagebrev.html">Klagebrev</a></li>
+						<li><a href="tekster/dialog.html">Samtale</a></li>
+						<li><a href="tekster/fortell.html">Fortell om deg selv</a></li>
+					</ul>
+				</li>
+
 				<li><a href="materialer.html">Полезные ресурсы</a></li>
 			</ul>
 		</nav>
@@ -47,10 +61,6 @@
 				<a href="materialer.html">Полезные ресурсы</a>
 			</div>
 		</section>
-		<link
-			rel="stylesheet"
-			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
-		/>
 		<!-- Инициализируем плагин при загрузке страницы -->
 		<!-- Подключите ваш основной скрипт, если он нужен -->
 		<script defer src="script.js"></script>
