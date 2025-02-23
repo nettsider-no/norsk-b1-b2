@@ -4,12 +4,12 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Forbered deg til Norskprøve</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/particlesjs/2.2.2/particles.min.js"></script>
 		<link rel="stylesheet" href="styles.css" />
-		<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
-		<script defer src="script.js"></script>
 		<!-- Вы можете добавить свой favicon и метатеги -->
 	</head>
 	<body>
+		<canvas class="background"></canvas>
 		<!-- Навигационная панель -->
 		<nav class="navbar">
 			<div class="logo">
@@ -33,22 +33,64 @@
 		</nav>
 
 		<!-- Главный экран (Hero) -->
-		<div id="particles-js">
-			<section class="hero">
-				<h1>Forbered deg til Norskprøve</h1>
-				<p>
-					Vi er her for å hjelpe deg med å forberede deg til eksamen. Oppdag
-					nyttige tips, motiverende råd og alt du trenger for å lykkes på
-					Norskprøve B1–B2.
-				</p>
-				<div class="menu-buttons">
-					<a href="uttrykk.html">Полезные выражения</a>
-					<a href="synonymer.html">Синонимы</a>
-					<a href="skrivetips.html">Советы по письму</a>
-					<a href="eksempler.html">Образцы текстов</a>
-					<a href="materialer.html">Полезные ресурсы</a>
-				</div>
-			</section>
-		</div>
+		<section class="hero">
+			<h1>Forbered deg til Norskprøve</h1>
+			<p>
+				Vi er her for å hjelpe deg med å forberede deg til eksamen. Oppdag
+				nyttige tips, motiverende råd og alt du trenger for å lykkes på
+				Norskprøve B1–B2.
+			</p>
+			<div class="menu-buttons">
+				<a href="uttrykk.html">Полезные выражения</a>
+				<a href="synonymer.html">Синонимы</a>
+				<a href="skrivetips.html">Советы по письму</a>
+				<a href="eksempler.html">Образцы текстов</a>
+				<a href="materialer.html">Полезные ресурсы</a>
+			</div>
+		</section>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+		/>
+
+		<!-- Инициализируем плагин при загрузке страницы -->
+		<script>
+			window.onload = function () {
+				Particles.init({
+					selector: '.background',
+					maxParticles: 100,
+					sizeVariations: 3,
+					speed: 0.5,
+					color: '#007aff',
+					minDistance: 120,
+					connectParticles: false,
+					responsive: [
+						{
+							breakpoint: 768,
+							options: {
+								maxParticles: 200,
+								color: '#48F2E3',
+								connectParticles: false,
+							},
+						},
+						{
+							breakpoint: 425,
+							options: {
+								maxParticles: 100,
+								connectParticles: true,
+							},
+						},
+						{
+							breakpoint: 320,
+							options: {
+								maxParticles: 0, // отключает particles.js
+							},
+						},
+					],
+				})
+			}
+		</script>
+		<!-- Подключите ваш основной скрипт, если он нужен -->
+		<script defer src="script.js"></script>
 	</body>
 </html>

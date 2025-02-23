@@ -25,19 +25,20 @@ body {
 	color: var(--text-color);
 }
 
-a {
-	color: var(--text-color);
-	text-decoration: none;
-}
-
-#particles-js {
-	position: fixed;
+.background {
+	position: absolute;
+	display: block;
 	top: 0;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	z-index: -1; /* Расположить позади контента */
-	background: #f5f5f7; /* Можно задать цвет фона, если нужно */
+	z-index: 0;
+	background: #f5f5f7; /* или другой нужный цвет */
+}
+
+a {
+	color: var(--text-color);
+	text-decoration: none;
 }
 
 /* Навигационная панель */
@@ -139,6 +140,11 @@ a {
 	height: 100vh;
 	padding: 0 20px;
 	background: linear-gradient(135deg, #ffffff, #f0f0f5);
+}
+
+.hero h1,
+.hero p {
+	animation: fadeInUp 0.6s forwards;
 }
 
 .hero h1 {
