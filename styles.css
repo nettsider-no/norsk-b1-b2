@@ -13,6 +13,10 @@
 	box-sizing: border-box;
 }
 
+html {
+	scroll-behavior: smooth;
+}
+
 body {
 	font-family: 'Inter', sans-serif;
 	margin: 0;
@@ -24,6 +28,16 @@ body {
 a {
 	color: var(--text-color);
 	text-decoration: none;
+}
+
+#particles-js {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: -1; /* Расположить позади контента */
+	background: #f5f5f7; /* Можно задать цвет фона, если нужно */
 }
 
 /* Навигационная панель */
@@ -166,13 +180,27 @@ a {
 	padding: 12px 20px;
 	border-radius: 12px;
 	font-weight: 600;
-	transition: background 0.3s;
+	transition: 0.3s;
 	min-width: 120px;
 	text-align: center;
+	opacity: 0;
+	transform: translateY(20px);
+	animation: fadeInUp 0.6s forwards;
+	animation-delay: 0.5s; /* настройте задержку по вкусу */
+}
+
+@keyframes fadeInUp {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 .menu-buttons a:hover {
 	background: #005bb5;
+	transform: translateY(3px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
 }
 
 /* Основной контейнер */
@@ -256,12 +284,15 @@ main {
 	cursor: pointer;
 	font-size: 1rem;
 	margin-top: 15px;
-	transition: background 0.3s;
+	transition: 0.3s;
 }
 
 .toggle-btn:hover,
 .toggle-btn:focus {
 	background: #005bb5;
+	transform: translateY(-3px);
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
 	outline: none;
 }
 
@@ -429,7 +460,7 @@ main {
 /* Адаптивный дизайн */
 
 /* При ширине от 1102px до 1131px делаем перенос в логотипе */
-@media (min-width: 1102px) and (max-width: 1131px) {
+@media (min-width: 1102px) and (max-width: 1265px) {
 	.line-break {
 		display: block;
 	}
@@ -514,6 +545,16 @@ main {
 	.logo {
 		font-size: 1.3rem;
 	}
+
+	.examples-container {
+		width: 100%;
+		padding: 10px;
+	}
+
+	.example-card {
+		width: 90%;
+		max-width: none;
+	}
 }
 
 /* Для экранов до 600px корректируем размеры логотипа, навигации, образцов и кнопки "Показать больше" */
@@ -542,6 +583,19 @@ main {
 		max-width: 350px;
 	}
 
+	main {
+		width: 100%;
+		max-width: none;
+		margin: 0;
+		padding: 10px;
+	}
+
+	.ex-container {
+		width: 95%;
+		padding: 15px;
+		margin: 30px auto 30px;
+	}
+
 	.ex-container h1 {
 		font-size: 2.2rem;
 	}
@@ -551,15 +605,11 @@ main {
 	.ex-body {
 		font-size: 1rem;
 	}
+
 	/* Для кнопки "Показать больше" адаптация для узких экранов */
 	.toggle-btn {
 		width: 100%;
 		box-sizing: border-box;
-	}
-	/* Расширяем карточки с примерами текстов для маленьких экранов */
-	.example-card {
-		width: 90%;
-		max-width: none;
 	}
 }
 
@@ -681,7 +731,7 @@ main {
 
 .lb-image img {
 	max-width: 100% !important;
-	min-height: 500 !important;
+	min-height: 500px !important;
 	max-height: 100% !important;
 	object-fit: cover; /* или contain */
 }
