@@ -26,31 +26,27 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Функция для сворачивания/разворачивания скрытого контента с сохранением состояния
 	const toggleButtons = document.querySelectorAll('.toggle-btn')
 	toggleButtons.forEach((button, index) => {
-		// Восстановление состояния при загрузке страницы
-		if (sessionStorage.getItem('toggleState-' + index) === 'expanded') {
-			const hiddenContent = button.previousElementSibling
-			if (hiddenContent) {
-				hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
-				button.textContent = 'Скрыть'
-			}
+		const hiddenContent = button.previousElementSibling
+		if (
+			hiddenContent &&
+			sessionStorage.getItem('toggleState-' + index) === 'expanded'
+		) {
+			hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
+			button.textContent = 'Скрыть'
 		}
 
 		button.addEventListener('click', function () {
-			const hiddenContent = this.previousElementSibling
-			if (hiddenContent) {
-				if (
-					hiddenContent.style.maxHeight &&
-					hiddenContent.style.maxHeight !== '0px'
-				) {
-					hiddenContent.style.maxHeight = '0'
-					this.textContent = 'Показать больше'
-					sessionStorage.setItem('toggleState-' + index, 'collapsed')
-					this.blur()
-				} else {
-					hiddenContent.style.maxHeight = hiddenContent.scrollHeight + 'px'
-					this.textContent = 'Скрыть'
-					sessionStorage.setItem('toggleState-' + index, 'expanded')
-				}
+			const content = this.previousElementSibling
+			if (!content) return
+			if (content.style.maxHeight && content.style.maxHeight !== '0px') {
+				content.style.maxHeight = '0'
+				this.textContent = 'Показать больше'
+				sessionStorage.setItem('toggleState-' + index, 'collapsed')
+				this.blur()
+			} else {
+				content.style.maxHeight = content.scrollHeight + 'px'
+				this.textContent = 'Скрыть'
+				sessionStorage.setItem('toggleState-' + index, 'expanded')
 			}
 		})
 	})
@@ -90,19 +86,35 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// Mousemove параллакс-эффект для фона (с задержкой 1.8 сек)
+	// Функция параллакса фона
+	const parallaxHandler = e => {
+		const x = e.clientX
+		const y = e.clientY
+		// Множитель смещения можно подстроить (здесь 10)
+		const moveX = 50 + (x / window.innerWidth - 0.5) * 10
+		const moveY = 50 + (y / window.innerHeight - 0.5) * 10
+		document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
+	}
+
+	// Функция для включения или отключения параллакса в зависимости от ширины окна
+	const setupParallax = () => {
+		// Если устройство широкое (например, десктоп), добавляем обработчик mousemove
+		if (window.innerWidth > 768) {
+			document.addEventListener('mousemove', parallaxHandler)
+		} else {
+			// Для мобильных устройств сбрасываем положение фона и удаляем обработчик (если ранее был добавлен)
+			document.body.style.backgroundPosition = '50% 50%'
+			document.removeEventListener('mousemove', parallaxHandler)
+		}
+	}
+
+	// Запуск параллакса с задержкой 2 сек (2000 мс)
 	setTimeout(() => {
-		document.addEventListener('mousemove', function (e) {
-			// Получаем координаты мыши
-			const x = e.clientX
-			const y = e.clientY
+		setupParallax()
+	}, 2000)
 
-			// Вычисляем смещение: базовая позиция 50%, смещение ±7.5% (настроено через множитель 11)
-			const moveX = 50 + (x / window.innerWidth - 0.5) * 11
-			const moveY = 50 + (y / window.innerHeight - 0.5) * 11
-
-			// Применяем новое положение фона к body
-			document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
-		})
-	}, 1800)
+	// Обновляем настройки параллакса при изменении размеров окна
+	window.addEventListener('resize', () => {
+		setupParallax()
+	})
 })

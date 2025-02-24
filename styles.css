@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
+/* ───────────────────────────────
+   Основные переменные и глобальные стили
+──────────────────────────────── */
 :root {
 	--primary-color: #007aff;
 	--text-color: #1d1d1f;
@@ -8,7 +11,6 @@
 	--shadow-color: rgba(0, 0, 0, 0.06);
 }
 
-/* Универсальная модель коробки */
 * {
 	box-sizing: border-box;
 }
@@ -22,8 +24,15 @@ body {
 	margin: 0;
 	padding: 0;
 	color: var(--text-color);
-	background: url('images/bg.png') no-repeat center center/cover;
-	background-attachment: fixed; /* Эффект параллакса на десктопе */
+	background: url('images/bg-min.png') no-repeat center center/cover;
+	background-color: #585859;
+	background-attachment: fixed;
+	-webkit-background-attachment: fixed;
+	-moz-background-attachment: fixed;
+	-o-background-attachment: fixed;
+	-webkit-transition: background-position 0.4s ease-out;
+	-moz-transition: background-position 0.4s ease-out;
+	-o-transition: background-position 0.4s ease-out;
 	transition: background-position 0.4s ease-out;
 }
 
@@ -34,7 +43,7 @@ body::before {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.38); /* Чуть более тёмный, чем 0.3 */
+	background: rgba(0, 0, 0, 0.38);
 	pointer-events: none;
 	z-index: -1;
 }
@@ -44,7 +53,9 @@ a {
 	text-decoration: none;
 }
 
-/* Навигационная панель */
+/* ───────────────────────────────
+   Навигационная панель и выпадающее меню
+──────────────────────────────── */
 .navbar {
 	position: fixed;
 	top: 0;
@@ -73,7 +84,6 @@ a {
 	color: var(--text-color);
 }
 
-/* Навигационные ссылки */
 .nav-links {
 	list-style: none;
 	display: flex;
@@ -85,8 +95,11 @@ a {
 	color: var(--text-color);
 	font-weight: 500;
 	padding: 8px 12px;
+	-webkit-transition: color 0.3s;
+	-moz-transition: color 0.3s;
+	-o-transition: color 0.3s;
 	transition: color 0.3s;
-	white-space: nowrap; /* чтобы не переносило текст */
+	white-space: nowrap;
 }
 
 .nav-links li a:hover,
@@ -95,9 +108,9 @@ a {
 	outline: none;
 }
 
-/* Кнопка мобильного меню */
+/* Кнопка мобильного меню (бургер) */
 .menu-toggle {
-	display: none; /* Скрыто по умолчанию, показываем в @media */
+	display: none; /* по умолчанию скрыто, показывается в медиа-запросах */
 	flex-direction: column;
 	background: none;
 	border: none;
@@ -110,16 +123,20 @@ a {
 	width: 25px;
 	background-color: var(--text-color);
 	margin: 3px 0;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
 
+/* Выпадающее подменю для десктопа */
 .dropdown {
 	position: relative;
 }
 .nav-links li .dropdown-toggle {
 	position: relative;
 	padding-right: 26px;
-	cursor: pointer; /* Показываем, что это «кликабельный» элемент */
+	cursor: pointer;
 }
 a.dropdown-toggle::after {
 	position: absolute;
@@ -130,6 +147,7 @@ a.dropdown-toggle::after {
 	height: 20px;
 	color: currentColor;
 }
+
 .dropdown-menu {
 	position: absolute;
 	top: 130%;
@@ -142,32 +160,49 @@ a.dropdown-toggle::after {
 	padding: 0;
 	margin: 0;
 	opacity: 0;
+	-webkit-transform: translateY(-10px);
+	-moz-transform: translateY(-10px);
+	-o-transform: translateY(-10px);
 	transform: translateY(-10px);
 	pointer-events: none;
+	-webkit-transition: opacity 0.3s ease, -webkit-transform 0.3s ease;
+	-moz-transition: opacity 0.3s ease, -moz-transform 0.3s ease;
+	-o-transition: opacity 0.3s ease, -o-transform 0.3s ease;
 	transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 .dropdown-menu li {
 	list-style: none;
 }
+
 .dropdown-menu li a {
 	display: block;
 	padding: 12px 17px;
 	color: var(--text-color);
 	white-space: nowrap;
+	-webkit-transition: color 0.3s ease;
+	-moz-transition: color 0.3s ease;
+	-o-transition: color 0.3s ease;
 	transition: color 0.3s ease;
 }
-/* .dropdown-menu li a:hover {
-	color: var(--primary-color);
-} */
 
-/* Когда .open добавлен к .dropdown, подменю показывается */
+.dropdown-menu li a:hover {
+	color: var(--primary-color);
+}
+
+/* Показываем подменю, когда родитель имеет класс .open */
 .dropdown.open .dropdown-menu {
 	opacity: 1;
+	-webkit-transform: translateY(0);
+	-moz-transform: translateY(0);
+	-o-transform: translateY(0);
 	transform: translateY(0);
 	pointer-events: auto;
 }
 
-/* Заголовок страницы */
+/* ───────────────────────────────
+   Заголовок страницы и Hero
+──────────────────────────────── */
 .site-header {
 	text-align: center;
 	padding: 100px 20px 30px;
@@ -188,7 +223,6 @@ a.dropdown-toggle::after {
 	margin: 0 auto;
 }
 
-/* Основное содержимое */
 .hero {
 	display: flex;
 	flex-direction: column;
@@ -205,18 +239,7 @@ a.dropdown-toggle::after {
 	font-size: 3.9rem;
 	margin: 0 0 20px;
 	font-weight: 600;
-	/* Лёгкая тень для контраста */
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-}
-
-/* Дополнительное оформление hero.h1 для экранов от ~480 до 600px */
-@media (max-width: 600px) and (min-width: 481px) {
-	.hero h1 {
-		font-size: 2.2rem;
-		line-height: 1.3;
-		width: 90%;
-		margin: 0 auto 20px;
-	}
 }
 
 .hero p {
@@ -226,7 +249,9 @@ a.dropdown-toggle::after {
 	margin: 0 0 30px;
 }
 
-/* Кнопки главного меню */
+/* ───────────────────────────────
+   Кнопки главного меню
+──────────────────────────────── */
 .menu-buttons {
 	display: flex;
 	gap: 15px;
@@ -239,18 +264,44 @@ a.dropdown-toggle::after {
 	background: var(--primary-color);
 	color: #fff;
 	padding: 12px 20px;
-	border-radius: 18px; /* более округлённая форма */
+	border-radius: 18px;
 	font-weight: 600;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
 	transition: 0.3s;
 	min-width: 120px;
 	text-align: center;
-	/* Эффект плавного появления */
 	opacity: 0;
+	-webkit-transform: translateY(20px);
+	-moz-transform: translateY(20px);
+	-o-transform: translateY(20px);
 	transform: translateY(20px);
+	-webkit-animation: fadeInUp 0.6s forwards;
+	-moz-animation: fadeInUp 0.6s forwards;
+	-o-animation: fadeInUp 0.6s forwards;
 	animation: fadeInUp 0.6s forwards;
 	animation-delay: 0.5s;
 }
 
+@-webkit-keyframes fadeInUp {
+	to {
+		opacity: 1;
+		-webkit-transform: translateY(0);
+	}
+}
+@-moz-keyframes fadeInUp {
+	to {
+		opacity: 1;
+		-moz-transform: translateY(0);
+	}
+}
+@-o-keyframes fadeInUp {
+	to {
+		opacity: 1;
+		-o-transform: translateY(0);
+	}
+}
 @keyframes fadeInUp {
 	to {
 		opacity: 1;
@@ -260,12 +311,20 @@ a.dropdown-toggle::after {
 
 .menu-buttons a:hover {
 	background: #005bb5;
+	-webkit-transform: translateY(-2px);
+	-moz-transform: translateY(-2px);
+	-o-transform: translateY(-2px);
 	transform: translateY(-2px);
-	box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 6px 18px rgba(246, 246, 246, 0.2);
+	-webkit-transition: transform 0.3s, box-shadow 0.3s;
+	-moz-transition: transform 0.3s, box-shadow 0.3s;
+	-o-transition: transform 0.3s, box-shadow 0.3s;
 	transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Основной контейнер */
+/* ───────────────────────────────
+   Основной контейнер и секции
+──────────────────────────────── */
 main {
 	width: 90%;
 	max-width: 1200px;
@@ -273,7 +332,6 @@ main {
 	padding: 20px;
 }
 
-/* Секции */
 .category {
 	background: var(--card-background);
 	border-radius: 14px;
@@ -282,7 +340,6 @@ main {
 	padding: 20px 24px;
 }
 
-/* Заголовки секций */
 .category h2 {
 	font-size: 1.6rem;
 	margin-bottom: 60px;
@@ -292,6 +349,9 @@ main {
 /* Скрытый контент */
 .hidden-content {
 	overflow: hidden;
+	-webkit-transition: max-height 0.5s ease;
+	-moz-transition: max-height 0.5s ease;
+	-o-transition: max-height 0.5s ease;
 	transition: max-height 0.5s ease;
 	max-height: 0;
 	overflow-anchor: none;
@@ -301,27 +361,30 @@ main {
 	background-color: #fafafa;
 	padding: 10px 15px;
 	border-radius: 8px;
-	max-height: 2000px; /* большое значение, чтобы влез весь текст */
+	max-height: 2000px;
+	-webkit-transition: max-height 0.5s ease;
+	-moz-transition: max-height 0.5s ease;
+	-o-transition: max-height 0.5s ease;
 	transition: max-height 0.5s ease;
 }
 
 .hidden-content p,
 .hidden-content ul,
 .hidden-content li {
-	margin-bottom: 1em; /* Отступ снизу между абзацами и элементами списков */
-	line-height: 1.6; /* Увеличенный интерлиньяж для удобочитаемости */
+	margin-bottom: 1em;
+	line-height: 1.6;
 }
 
 .sub-section {
-	margin-bottom: 40px; /* Добавляем отступ между статьями */
+	margin-bottom: 40px;
 }
 
 .sub-section h3 {
 	margin-top: 0;
-	font-size: 1.4rem; /* Чуть меньше, чем h2, но всё ещё заметно */
-	margin-bottom: 10px; /* Отступ снизу, чтобы текст не прилипал */
+	font-size: 1.4rem;
+	margin-bottom: 10px;
 	border-left: 4px solid var(--primary-color);
-	padding-left: 10px; /* Вертикальная полоса слева для акцента */
+	padding-left: 10px;
 }
 
 .sub-section h4 {
@@ -336,7 +399,9 @@ main {
 	color: #1d1d1d;
 }
 
-/* Кнопка сворачивания/разворачивания (Показать больше) */
+/* ───────────────────────────────
+   Кнопка "Показать больше"
+──────────────────────────────── */
 .toggle-btn {
 	background: var(--primary-color);
 	color: #fff;
@@ -346,19 +411,30 @@ main {
 	cursor: pointer;
 	font-size: 1rem;
 	margin-top: 15px;
+	-webkit-transition: 0.3s;
+	-moz-transition: 0.3s;
+	-o-transition: 0.3s;
 	transition: 0.3s;
 }
 
 .toggle-btn:hover,
 .toggle-btn:focus {
 	background: #005bb5;
+	-webkit-transform: translateY(-3px);
+	-moz-transform: translateY(-3px);
+	-o-transform: translateY(-3px);
 	transform: translateY(-3px);
 	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+	-webkit-transition: transform 0.3s, box-shadow 0.3s;
+	-moz-transition: transform 0.3s, box-shadow 0.3s;
+	-o-transition: transform 0.3s, box-shadow 0.3s;
 	transition: transform 0.3s, box-shadow 0.3s;
 	outline: none;
 }
 
-/* Стили для текста */
+/* ───────────────────────────────
+   Стили для текста
+──────────────────────────────── */
 .phrase {
 	font-size: 1.1rem;
 	font-weight: 600;
@@ -372,7 +448,9 @@ main {
 	margin-bottom: 10px;
 }
 
-/* Контейнер для примеров текстов */
+/* ───────────────────────────────
+   Контейнер примеров текстов
+──────────────────────────────── */
 .examples-container {
 	width: 90%;
 	max-width: 1000px;
@@ -380,6 +458,7 @@ main {
 	padding: 20px;
 	text-align: center;
 }
+
 .examples-container h1 {
 	font-size: 2.8rem;
 	margin-bottom: 20px;
@@ -388,17 +467,18 @@ main {
 
 .examples-container p {
 	font-size: 1.1rem;
-	margin-top: 0;
-	margin-bottom: 30px;
+	margin: 0 0 30px;
 	color: #fff;
 	opacity: 0.9;
 }
+
 .examples-menu {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	gap: 20px;
 }
+
 .example-card {
 	background: var(--card-background);
 	border-radius: 12px;
@@ -408,12 +488,20 @@ main {
 	max-width: 260px;
 	display: flex;
 	flex-direction: column;
+	-webkit-transition: transform 0.3s, box-shadow 0.3s;
+	-moz-transition: transform 0.3s, box-shadow 0.3s;
+	-o-transition: transform 0.3s, box-shadow 0.3s;
 	transition: transform 0.3s, box-shadow 0.3s;
 }
+
 .example-card:hover {
+	-webkit-transform: translateY(-5px);
+	-moz-transform: translateY(-5px);
+	-o-transform: translateY(-5px);
 	transform: translateY(-5px);
 	box-shadow: 0 4px 12px var(--shadow-color);
 }
+
 .example-card h3 {
 	margin-top: 0;
 	font-size: 1.5rem;
@@ -430,6 +518,7 @@ main {
 	margin: 10px 0 15px;
 	flex-grow: 1;
 }
+
 .example-card a {
 	text-decoration: none;
 	background: var(--primary-color);
@@ -437,16 +526,22 @@ main {
 	padding: 10px 15px;
 	border-radius: 8px;
 	font-weight: 600;
+	-webkit-transition: background 0.3s;
+	-moz-transition: background 0.3s;
+	-o-transition: background 0.3s;
 	transition: background 0.3s;
 	display: block;
 	text-align: center;
 	width: 100%;
 }
+
 .example-card a:hover {
 	background: #005bb5;
 }
 
-/* Контейнер синонимов */
+/* ───────────────────────────────
+   Контейнер синонимов
+──────────────────────────────── */
 .synonyms-container {
 	margin: 100px auto;
 	padding: 20px;
@@ -454,66 +549,79 @@ main {
 	border-radius: 12px;
 	box-shadow: 0 2px 6px var(--shadow-color);
 }
+
 .synonyms-container h1 {
 	text-align: center;
 	font-size: 2.8rem;
 	margin-bottom: 20px;
 	color: var(--primary-color);
 }
+
 .synonyms-container ol {
 	padding-left: 20px;
 }
+
 .synonyms-container li {
 	margin-bottom: 20px;
 	text-align: left;
 	line-height: 1.6;
 }
+
 .synonyms-container li strong {
 	display: block;
 	font-size: 1.1rem;
 	margin-bottom: 5px;
 }
+
 .synonyms-container li em {
 	font-style: normal;
 	color: #555;
 }
 
-/* Контейнер образцов текстов */
+/* ───────────────────────────────
+   Контейнер образцов текстов
+──────────────────────────────── */
 .ex-container {
 	width: 90%;
 	max-width: 1000px;
-	margin: 0px auto 50px;
+	margin: 0 auto 50px;
 	padding: 20px;
 	background: var(--card-background);
 	border-radius: 12px;
 	box-shadow: 0 2px 6px var(--shadow-color);
 	text-align: center;
 }
+
 .ex-container h1 {
 	font-size: 2.8rem;
 	margin-bottom: 30px;
 	color: var(--primary-color);
 }
+
 .ex-entry {
 	margin-bottom: 40px;
 	padding-bottom: 20px;
 	text-align: left;
 }
+
 .ex-entry:last-child {
 	border-bottom: none;
 	margin-bottom: 0;
 	padding-bottom: 0;
 }
+
 .ex-title {
 	font-size: 1.8rem;
 	margin-bottom: 10px;
 }
+
 .ex-body {
 	font-size: 1.1rem;
 	line-height: 1.6;
 	margin-bottom: 15px;
 	color: #333;
 }
+
 .ex-translation {
 	font-size: 0.95rem;
 	color: #777;
@@ -522,16 +630,17 @@ main {
 	padding-top: 10px;
 }
 
-/* Адаптивный дизайн */
-
-/* При ширине от 1102px до 1131px делаем перенос в логотипе */
+/* ───────────────────────────────
+   Адаптивный дизайн
+──────────────────────────────── */
+/* Экран от 1102px до 1265px */
 @media (min-width: 1102px) and (max-width: 1265px) {
 	.line-break {
 		display: block;
 	}
 }
 
-/* Корректируем навигацию и логотип для экранов до 1200px */
+/* До 1200px */
 @media (max-width: 1200px) {
 	.nav-links li a {
 		padding: 6px 8px;
@@ -545,113 +654,70 @@ main {
 	}
 }
 
-/* Меню для устройств с шириной до 1070px */
+/* Мобильное меню: до 1100px */
 @media (max-width: 1100px) {
-	/* Кнопка мобильного меню */
 	.menu-toggle {
-		display: flex; /* Показываем гамбургер */
-		flex-direction: column;
-		background: none;
-		border: none;
-		cursor: pointer;
-		padding: 5px;
+		display: flex;
 	}
 	.menu-toggle .bar {
 		height: 3px;
 		width: 25px;
 		background-color: var(--text-color);
 		margin: 3px 0;
+		-webkit-transition: all 0.3s ease;
+		-moz-transition: all 0.3s ease;
+		-o-transition: all 0.3s ease;
 		transition: all 0.3s ease;
 	}
-
-	/* Базовые стили для nav-links в мобильном режиме */
+	/* Основное меню */
 	.nav-links {
-		/* Скрываем меню через max-height и прозрачность (вместо display:none) */
 		position: absolute;
-		top: 60px; /* Ниже navbar */
+		top: 60px;
 		right: 0;
 		background: var(--card-background);
 		box-shadow: 0 2px 8px var(--shadow-color);
 		border-radius: 8px;
-		padding: 10px 20px;
+		padding: 30px 20px;
 		gap: 15px;
-
-		/* Переход для плавного раскрытия */
+		flex-direction: column;
+		align-items: flex-start;
 		max-height: 0;
 		opacity: 0;
 		overflow: hidden;
+		-webkit-transition: max-height 0.3s ease, opacity 0.3s ease;
+		-moz-transition: max-height 0.3s ease, opacity 0.3s ease;
+		-o-transition: max-height 0.3s ease, opacity 0.3s ease;
 		transition: max-height 0.3s ease, opacity 0.3s ease;
-
-		/* Вертикальное расположение */
-		flex-direction: column;
-		align-items: flex-start;
 	}
-
-	/* Когда класс .active добавлен (при нажатии на бургер) — меню раскрывается */
 	.nav-links.active {
-		max-height: 600px; /* Достаточно большое значение для всех пунктов */
+		max-height: 600px;
 		opacity: 1;
-		right: 10px; /* Отступ справа */
+		right: 10px;
 	}
-
-	/* Стили для элементов списка в мобильном меню */
 	.nav-links li {
 		margin: 10px 0;
 	}
-
-	/* Логотип */
 	.logo {
 		font-size: 1.5rem;
 		font-weight: 600;
 	}
-
-	/* Пункт меню с подменю */
+	/* Подменю в мобильном меню */
 	.nav-links li.dropdown {
 		position: relative;
 		width: 100%;
 	}
-
-	/* Скрываем подменю по умолчанию */
 	.nav-links li.dropdown .dropdown-menu {
-		/* position: static;
-		opacity: 0;
-		transform: translateY(-10px);
-		pointer-events: none;
-		transition: opacity 0.3s ease, transform 0.3s ease;
-		width: 100%;
-		padding-left: 15px;  Отступ для визуальной вложенности 
-		margin: 0; */
 		display: none;
 		position: static;
 		margin-top: 5px;
 		padding: 0;
 	}
-
-	.nav-links li.dropdown.open {
-		margin-bottom: 0px;
-	}
-
-	/* Когда к родительскому <li> добавлен класс .open — подменю раскрывается */
 	.nav-links li.dropdown.open .dropdown-menu {
 		display: block;
 	}
-
-	/* Внешний вид ссылок в подменю */
-	.nav-links li.dropdown .dropdown-menu li a {
-		display: block;
-		padding: 8px 15px;
-		color: var(--text-color);
-		white-space: nowrap;
-		transition: background 0.3s ease;
-	}
-	.nav-links li.dropdown .dropdown-menu li a:hover {
-		color: var(--primary-color);
-	}
-
-	/* Добавляем стрелку ▼ к пункту, у которого есть подменю */
 }
 
-/* Для экранов до 900px корректируем размеры заголовков и кнопок */
+/* До 900px */
 @media (max-width: 900px) {
 	.hero h1 {
 		font-size: 3.6rem;
@@ -663,7 +729,6 @@ main {
 		padding: 10px 16px;
 		min-width: 100px;
 	}
-	/* Чтобы шапка не перекрывала контент */
 	.site-header {
 		margin-top: 70px;
 	}
@@ -675,17 +740,19 @@ main {
 	}
 }
 
+/* До 768px: отключаем фиксированное фоновое прикрепление */
 @media (max-width: 768px) {
 	body {
 		background-attachment: scroll;
+		-webkit-background-attachment: scroll;
 	}
 }
 
-/* Для экранов до 700px корректируем навигацию и логотип */
+/* До 700px */
 @media (max-width: 700px) {
 	.nav-links {
-		right: 10px; /* уменьшаем отступ справа */
-		padding: 10px 15px; /* уменьшаем внутренние отступы */
+		right: 10px;
+		padding: 10px 15px;
 		gap: 10px;
 	}
 	.nav-links li a {
@@ -695,19 +762,17 @@ main {
 	.logo {
 		font-size: 1.3rem;
 	}
-
 	.examples-container {
 		width: 100%;
 		padding: 10px;
 	}
-
 	.example-card {
 		width: 90%;
 		max-width: none;
 	}
 }
 
-/* Для экранов до 600px корректируем размеры логотипа, навигации, образцов и кнопки "Показать больше" */
+/* До 600px */
 @media (max-width: 600px) {
 	.logo {
 		font-size: 1.3rem;
@@ -716,17 +781,14 @@ main {
 		font-size: 0.95rem;
 		padding: 6px 10px;
 	}
-
 	.hero h1 {
 		width: 100%;
 		font-size: 2.8rem;
 		align-self: stretch;
 	}
-
 	.hero p {
 		font-size: 1.1rem;
 	}
-
 	.menu-buttons {
 		flex-direction: column;
 		align-items: center;
@@ -737,20 +799,17 @@ main {
 		padding: 12px 20px;
 		min-width: 120px;
 	}
-
 	main {
 		width: 100%;
 		max-width: none;
 		margin: 0;
 		padding: 10px;
 	}
-
 	.ex-container {
 		width: 95%;
 		padding: 15px;
 		margin: 30px auto 30px;
 	}
-
 	.ex-container h1 {
 		font-size: 2.2rem;
 	}
@@ -760,15 +819,13 @@ main {
 	.ex-body {
 		font-size: 1rem;
 	}
-
-	/* Для кнопки "Показать больше" адаптация для узких экранов */
 	.toggle-btn {
 		width: 100%;
 		box-sizing: border-box;
 	}
 }
 
-/* Дополнительный адаптив для ультрасужих устройств (до 480px) */
+/* До 480px */
 @media (max-width: 480px) {
 	.navbar {
 		padding: 8px 10px;
@@ -833,7 +890,7 @@ main {
 	}
 }
 
-/* Дополнительный адаптив для больших экранов (от 1400px) */
+/* Для больших экранов (от 1400px) */
 @media (min-width: 1400px) {
 	.site-header h1 {
 		font-size: 3rem;
@@ -884,14 +941,15 @@ main {
 	}
 }
 
+/* Изображения в контейнере .lb-image */
 .lb-image img {
 	max-width: 100% !important;
 	min-height: 500px !important;
 	max-height: 100% !important;
-	object-fit: cover; /* или contain */
+	object-fit: cover;
 }
 
-h1.animate__animated.animate__fadeInDown,
+/* Стили для анимаций Animate.css */
 h1.animate__animated.animate__fadeInDown {
 	color: #fff !important;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4) !important;
