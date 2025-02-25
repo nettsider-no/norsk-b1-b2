@@ -108,9 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
 				dropdown.classList.toggle('open')
 				e.currentTarget.blur()
 			})
+			toggleLink.addEventListener('touchend', e => {
+				e.currentTarget.blur()
+			})
 		}
 	})
-
 
 	// Добавляем флаг, чтобы параллакс работал только при зажатой мыши
 	let isMouseDown = false
