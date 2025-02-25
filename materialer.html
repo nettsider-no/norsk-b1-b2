@@ -521,6 +521,34 @@
 			</section>
 		</main>
 		<script src="lightbox2-2.11.5/dist/js/lightbox.js"></script>
+		<script>
+  function updateLightboxOptions() {
+    if (window.innerWidth < 900) {
+      // На устройствах с шириной меньше 900px
+      lightbox.option({
+        'resizeDuration': 400,
+        'wrapAround': true,
+        'disableScrolling': true,
+        'alwaysShowNavOnTouchDevices': true,
+        'fadeDuration': 400,
+				'positionFromTop': 300
+      });
+    } else {
+      // На устройствах с шириной 900px и больше
+      lightbox.option({
+        'resizeDuration': 300,
+        'wrapAround': true,
+        'disableScrolling': true,
+        'alwaysShowNavOnTouchDevices': true,
+        'fadeDuration': 300,
+				'positionFromTop': 50
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', updateLightboxOptions);
+  window.addEventListener('resize', updateLightboxOptions);
+</script>
 		<script defer src="script.js"></script>
 	</body>
 </html>

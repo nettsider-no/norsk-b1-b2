@@ -27,9 +27,6 @@ body {
 	background: url('images/bgm-min.png') no-repeat center center/cover;
 	background-color: #585859;
 	background-attachment: fixed;
-	-webkit-background-attachment: fixed;
-	-moz-background-attachment: fixed;
-	-o-background-attachment: fixed;
 	-webkit-transition: background-position 0.4s ease-out;
 	-moz-transition: background-position 0.4s ease-out;
 	-o-transition: background-position 0.4s ease-out;
@@ -50,10 +47,10 @@ body::before {
 }
 
 .no-select {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
 }
 
 a {
@@ -548,28 +545,17 @@ main {
    Адаптивный дизайн
 ──────────────────────────────── */
 /* Экран от 1102px до 1265px */
-@media (min-width: 1102px) and (max-width: 1265px) {
+@media (min-width: 1102px) and (max-width: 1307px) {
 	.line-break {
 		display: block;
 	}
 }
 
 /* До 1200px */
-@media (max-width: 1200px) {
-	.nav-links li a {
-		padding: 6px 8px;
-		font-size: 1rem;
-	}
-	.logo {
-		font-size: 1.3rem;
-	}
+@media (max-width: 1232px) {
 	.dropdown-menu li a {
 		padding: 12px 17px;
 	}
-}
-
-/* Мобильное меню: до 1100px */
-@media (max-width: 1100px) {
 	.menu-toggle {
 		display: flex;
 	}
@@ -587,12 +573,12 @@ main {
 	.nav-links {
 		position: absolute;
 		top: 60px;
-		right: 0;
+		right: 10px;
 		background: var(--card-background);
 		box-shadow: 0 2px 8px var(--shadow-color);
 		border-radius: 8px;
-		padding: 30px 20px;
-		gap: 15px;
+		padding: 5px 15px;
+		gap: 6px;
 		flex-direction: column;
 		align-items: flex-start;
 		max-height: 0;
@@ -609,7 +595,11 @@ main {
 		right: 10px;
 	}
 	.nav-links li {
-		margin: 10px 0;
+		margin: 8px 0;
+	}
+	.nav-links li a {
+		padding: 6px 8px;
+		font-size: 1rem;
 	}
 	.logo {
 		font-size: 1.5rem;
@@ -630,6 +620,8 @@ main {
 		display: block;
 	}
 }
+
+/* Мобильное меню: до 1100px */
 
 /* До 900px */
 @media (max-width: 900px) {
@@ -664,18 +656,6 @@ main {
 
 /* До 700px */
 @media (max-width: 700px) {
-	.nav-links {
-		right: 10px;
-		padding: 5px 15px;
-		gap: 6px;
-	}
-	.nav-links li {
-		margin: 8px 0;
-	}
-	.nav-links li a {
-		padding: 6px 8px;
-		font-size: 1rem;
-	}
 	.logo {
 		font-size: 1.3rem;
 	}
@@ -827,12 +807,6 @@ main {
 }
 
 /* Изображения в контейнере .lb-image */
-.lb-image img {
-	max-width: 100% !important;
-	min-height: 500px !important;
-	max-height: 100% !important;
-	object-fit: cover;
-}
 
 /* Стили для анимаций Animate.css */
 h1.animate__animated.animate__fadeInDown {
