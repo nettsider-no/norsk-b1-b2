@@ -34,6 +34,7 @@ body {
 	-moz-transition: background-position 0.4s ease-out;
 	-o-transition: background-position 0.4s ease-out;
 	transition: background-position 0.4s ease-out;
+	line-height: 1.6;
 }
 
 body::before {
@@ -43,9 +44,16 @@ body::before {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background: rgba(0, 0, 0, 0.38);
+	background: rgba(0, 0, 0, 0.335);
 	pointer-events: none;
 	z-index: -1;
+}
+
+.no-select {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
 }
 
 a {
@@ -61,7 +69,8 @@ a {
 	top: 0;
 	left: 0;
 	width: 100%;
-	background: var(--card-background);
+	background: linear-gradient(90deg, #ffffff, #e6e6e6);
+	border-bottom: 1px solid #ddd;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
@@ -100,6 +109,7 @@ a {
 	-o-transition: color 0.3s;
 	transition: color 0.3s;
 	white-space: nowrap;
+	letter-spacing: 0.3px;
 }
 
 .nav-links li a:hover,
@@ -201,6 +211,7 @@ a {
 	font-size: 2.5rem;
 	font-weight: 600;
 	margin-bottom: 20px;
+	letter-spacing: 0.5px;
 }
 
 .site-header p {
@@ -209,6 +220,8 @@ a {
 	font-size: 1.2rem;
 	max-width: 600px;
 	margin: 0 auto;
+	line-height: 1.6; /* Добавлено для улучшения читаемости */
+	letter-spacing: 0.3px; /* Добавлено для улучшения читаемости */
 }
 
 .hero {
@@ -228,6 +241,7 @@ a {
 	margin: 0 0 20px;
 	font-weight: 600;
 	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+	letter-spacing: 0.5px;
 }
 
 .hero p {
@@ -235,6 +249,7 @@ a {
 	line-height: 1.5;
 	max-width: 600px;
 	margin: 0 0 30px;
+	letter-spacing: 0.3px; /* Добавлено для улучшения читаемости */
 }
 
 /* ───────────────────────────────
@@ -332,6 +347,7 @@ main {
 	font-size: 1.6rem;
 	margin-bottom: 60px;
 	color: var(--primary-color);
+	letter-spacing: 0.5px;
 }
 
 /* Скрытый контент */
@@ -373,6 +389,7 @@ main {
 	margin-bottom: 10px;
 	border-left: 4px solid var(--primary-color);
 	padding-left: 10px;
+	letter-spacing: 0.3px; /* Добавлено для улучшения читаемости */
 }
 
 .sub-section h4 {
@@ -427,6 +444,7 @@ main {
 	font-size: 1.1rem;
 	font-weight: 600;
 	margin-top: 10px;
+	letter-spacing: 0.3px;
 }
 
 .example {
@@ -439,93 +457,6 @@ main {
 /* ───────────────────────────────
    Контейнер примеров текстов
 ──────────────────────────────── */
-.examples-container {
-	width: 90%;
-	max-width: 1000px;
-	margin: 100px auto 50px;
-	padding: 20px;
-	text-align: center;
-}
-
-.examples-container h1 {
-	font-size: 2.8rem;
-	margin-bottom: 20px;
-	font-weight: 600;
-}
-
-.examples-container p {
-	font-size: 1.1rem;
-	margin: 0 0 30px;
-	color: #fff;
-	opacity: 0.9;
-}
-
-.examples-menu {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	gap: 20px;
-}
-
-.example-card {
-	background: var(--card-background);
-	border-radius: 12px;
-	box-shadow: 0 2px 6px var(--shadow-color);
-	padding: 20px;
-	width: 100%;
-	max-width: 260px;
-	display: flex;
-	flex-direction: column;
-	-webkit-transition: transform 0.3s, box-shadow 0.3s;
-	-moz-transition: transform 0.3s, box-shadow 0.3s;
-	-o-transition: transform 0.3s, box-shadow 0.3s;
-	transition: transform 0.3s, box-shadow 0.3s;
-}
-
-.example-card:hover {
-	-webkit-transform: translateY(-5px);
-	-moz-transform: translateY(-5px);
-	-o-transform: translateY(-5px);
-	transform: translateY(-5px);
-	box-shadow: 0 4px 12px var(--shadow-color);
-}
-
-.example-card h3 {
-	margin-top: 0;
-	font-size: 1.5rem;
-	color: var(--primary-color);
-}
-
-.card-bottom {
-	margin-top: auto;
-}
-
-.card-bottom p {
-	font-size: 0.95rem;
-	color: #555;
-	margin: 10px 0 15px;
-	flex-grow: 1;
-}
-
-.example-card a {
-	text-decoration: none;
-	background: var(--primary-color);
-	color: #fff;
-	padding: 10px 15px;
-	border-radius: 8px;
-	font-weight: 600;
-	-webkit-transition: background 0.3s;
-	-moz-transition: background 0.3s;
-	-o-transition: background 0.3s;
-	transition: background 0.3s;
-	display: block;
-	text-align: center;
-	width: 100%;
-}
-
-.example-card a:hover {
-	background: #005bb5;
-}
 
 /* ───────────────────────────────
    Контейнер синонимов
@@ -543,6 +474,7 @@ main {
 	font-size: 2.8rem;
 	margin-bottom: 20px;
 	color: var(--primary-color);
+	letter-spacing: 0.5px;
 }
 
 .synonyms-container ol {
@@ -584,6 +516,7 @@ main {
 	font-size: 2.8rem;
 	margin-bottom: 30px;
 	color: var(--primary-color);
+	letter-spacing: 0.5px;
 }
 
 .ex-entry {
@@ -601,6 +534,7 @@ main {
 .ex-title {
 	font-size: 1.8rem;
 	margin-bottom: 10px;
+	letter-spacing: 0.3px;
 }
 
 .ex-body {
@@ -608,14 +542,6 @@ main {
 	line-height: 1.6;
 	margin-bottom: 15px;
 	color: #333;
-}
-
-.ex-translation {
-	font-size: 0.95rem;
-	color: #777;
-	margin-top: 10px;
-	border-top: 1px dashed #ccc;
-	padding-top: 10px;
 }
 
 /* ───────────────────────────────
@@ -753,14 +679,6 @@ main {
 	.logo {
 		font-size: 1.3rem;
 	}
-	.examples-container {
-		width: 100%;
-		padding: 10px;
-	}
-	.example-card {
-		width: 90%;
-		max-width: none;
-	}
 }
 
 @media (max-width: 640px) {
@@ -768,19 +686,20 @@ main {
 		display: block;
 	}
 	.hero h1 {
-		font-size: 3.5rem;
+		font-size: 3.3rem;
+		margin: 0 0 10px;
 	}
 	.hero p {
-		font-size: 1.2rem;
+		margin: 0 0 20px;
+		font-size: 1rem;
 	}
 	.menu-buttons {
 		flex-direction: column;
 		align-items: center;
-		gap: 16px;
 	}
 	.menu-buttons a {
 		width: 100%;
-		font-size: 1.1rem;
+		font-size: 1rem;
 		padding: 10px 12px;
 	}
 }
@@ -798,7 +717,6 @@ main {
 	}
 	.menu-buttons a {
 		width: 100%;
-		padding: 12px 14px;
 		min-width: 100px;
 	}
 	main {
@@ -837,11 +755,10 @@ main {
 		font-size: 1.2rem;
 	}
 	.hero h1 {
-		font-size: 2.4rem;
+		font-size: 2.5rem;
 	}
 	.hero p {
 		width: 100%;
-		font-size: 1rem;
 		align-self: stretch;
 	}
 	.site-header {
@@ -853,25 +770,11 @@ main {
 	.site-header p {
 		font-size: 1rem;
 	}
+	.menu-buttons a {
+		padding: 8px 12px;
+	}
 	main {
 		padding: 10px;
-	}
-	.examples-container h1 {
-		font-size: 2.4rem;
-	}
-	.examples-container p {
-		font-size: 1rem;
-	}
-	.example-card {
-		width: 90%;
-		max-width: none;
-		padding: 15px;
-	}
-	.example-card h3 {
-		font-size: 1.3rem;
-	}
-	.card-bottom p {
-		font-size: 0.9rem;
 	}
 	.synonyms-container h1 {
 		font-size: 2.4rem;
@@ -908,22 +811,7 @@ main {
 	main {
 		padding: 30px;
 	}
-	.examples-container h1 {
-		font-size: 3rem;
-	}
-	.examples-container p {
-		font-size: 1.3rem;
-	}
-	.example-card {
-		max-width: 280px;
-		padding: 25px;
-	}
-	.example-card h3 {
-		font-size: 1.8rem;
-	}
-	.card-bottom p {
-		font-size: 1.1rem;
-	}
+
 	.synonyms-container h1 {
 		font-size: 3rem;
 	}

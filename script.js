@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', () => {
-	'use strict'
+	;('use strict')
+
+	// Обработчики для отключения выделения текста за пределами <main>
+	document.addEventListener('mousedown', e => {
+		// Если событие НЕ происходит внутри <main>
+		if (!e.target.closest('main')) {
+			document.body.classList.add('no-select')
+		}
+	})
+
+	document.addEventListener('mouseup', () => {
+		document.body.classList.remove('no-select')
+	})
+
+	// (Опционально) Если курсор уходит с окна — тоже сброс
+	document.addEventListener('mouseleave', () => {
+		document.body.classList.remove('no-select')
+	})
 
 	// Анимация появления секций при прокрутке
 	const categories = document.querySelectorAll('.category')
@@ -94,30 +111,26 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// Сохранение позиции прокрутки при клике на Lightbox-ссылки
-	let storedScroll = 0
-	document.querySelectorAll('a[data-lightbox]').forEach(anchor => {
-		anchor.addEventListener('click', () => {
-			storedScroll = window.pageYOffset
-		})
-	})
 
-	// Восстановление позиции прокрутки, когда hash очищается (Lightbox закрыт)
-	window.addEventListener('hashchange', () => {
-		if (!location.hash) {
-			window.scrollTo({ top: storedScroll, behavior: 'smooth' })
-		}
+	// Добавляем флаг, чтобы параллакс работал только при зажатой мыши
+	let isMouseDown = false
+	document.addEventListener('mousedown', () => {
+		isMouseDown = true
+	})
+	document.addEventListener('mouseup', () => {
+		isMouseDown = false
 	})
 
 	// Функция параллакса фона
 	const parallaxHandler = e => {
 		// Если курсор находится внутри <main>, не применять параллакс
 		if (e.target.closest('main')) return
+		if (!isMouseDown) return
 
 		const x = e.clientX
 		const y = e.clientY
-		const moveX = 50 + (x / window.innerWidth - 0.5) * 10
-		const moveY = 50 + (y / window.innerHeight - 0.5) * 10
+		const moveX = 50 + (x / window.innerWidth - 0.5) * 5
+		const moveY = 50 + (y / window.innerHeight - 0.5) * 5
 		document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
 	}
 
@@ -132,8 +145,8 @@ document.addEventListener('DOMContentLoaded', () => {
 						const touch = e.touches[0]
 						const x = touch.clientX
 						const y = touch.clientY
-						const moveX = 50 + (x / window.innerWidth - 0.5) * 10
-						const moveY = 50 + (y / window.innerHeight - 0.5) * 10
+						const moveX = 50 + (x / window.innerWidth - 0.5) * 5
+						const moveY = 50 + (y / window.innerHeight - 0.5) * 5
 						document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
 					}
 				},
@@ -154,5 +167,26 @@ document.addEventListener('DOMContentLoaded', () => {
 	// Обновляем настройки параллакса при изменении размеров окна
 	window.addEventListener('resize', () => {
 		setupParallax()
+	})
+	// --- Новый блок: Восстановление скролла после закрытия Lightbox ---
+	// Сохраняем позицию скролла при открытии Lightbox
+	document.querySelectorAll('a[data-lightbox]').forEach(anchor => {
+		anchor.addEventListener('click', () => {
+			window.lightboxScrollPosition = window.pageYOffset
+		})
+	})
+
+	// Восстанавливаем позицию скролла при закрытии Lightbox (нажатие на элемент с классом .lb-close)
+	document.addEventListener('click', e => {
+		if (e.target.closest('.lb-close')) {
+			setTimeout(() => {
+				if (typeof window.lightboxScrollPosition !== 'undefined') {
+					window.scrollTo({
+						top: window.lightboxScrollPosition,
+						behavior: 'smooth',
+					})
+				}
+			}, 100)
+		}
 	})
 })
