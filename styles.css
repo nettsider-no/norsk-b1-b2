@@ -708,7 +708,7 @@ main {
 /* До 900px */
 @media (max-width: 900px) {
 	.hero h1 {
-		font-size: 3.6rem;
+		font-size: 3.3rem;
 	}
 	.hero p {
 		font-size: 1.3rem;
@@ -768,20 +768,20 @@ main {
 		display: block;
 	}
 	.hero h1 {
-		font-size: 3.9rem;
+		font-size: 3.5rem;
 	}
 	.hero p {
-		font-size: 1.4rem;
+		font-size: 1.2rem;
 	}
 	.menu-buttons {
 		flex-direction: column;
 		align-items: center;
-		gap: 18px;
+		gap: 16px;
 	}
 	.menu-buttons a {
 		width: 100%;
-		font-size: 1.2rem;
-		padding: 14px 18px;
+		font-size: 1.1rem;
+		padding: 10px 12px;
 	}
 }
 
@@ -793,13 +793,12 @@ main {
 
 	.hero h1 {
 		width: 100%;
-		font-size: 4.6rem;
+		font-size: 2.9rem;
 		align-self: stretch;
 	}
 	.menu-buttons a {
-		font-size: 1.3rem;
 		width: 100%;
-		padding: 18px 26px;
+		padding: 12px 14px;
 		min-width: 100px;
 	}
 	main {
@@ -836,6 +835,14 @@ main {
 
 	.logo {
 		font-size: 1.2rem;
+	}
+	.hero h1 {
+		font-size: 2.4rem;
+	}
+	.hero p {
+		width: 100%;
+		font-size: 1rem;
+		align-self: stretch;
 	}
 	.site-header {
 		padding: 80px 10px 20px;
