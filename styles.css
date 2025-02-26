@@ -826,11 +826,11 @@ p.animate__animated.animate__fadeInDown {
 }
 
 @media (hover: none) {
-	/* Сбрасываем стили фокуса у кнопки, когда выпадающее меню закрыто */
-	.dropdown:not(.open) .dropdown-toggle:focus {
-		outline: none;
-		background: none;
-		box-shadow: none;
-		color: var(--text-color);
-	}
+  /* Для устройств без hover — сбрасываем фокусное состояние у выпадающего меню */
+  .dropdown-toggle:focus {
+    outline: none;
+    box-shadow: none;
+    background: none;
+    color: var(--text-color);
+  }
 }

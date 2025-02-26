@@ -106,14 +106,16 @@ document.addEventListener('DOMContentLoaded', () => {
 			const handleToggle = e => {
 				e.preventDefault() // предотвращаем переход по ссылке
 				dropdown.classList.toggle('open')
-				// Если меню закрывается, через 50 мс снимаем фокус с ссылки
+				// Если меню закрывается, через 100 мс снимаем фокус с кнопки
 				if (!dropdown.classList.contains('open')) {
 					setTimeout(() => {
 						toggleLink.blur()
-					}, 50)
+					}, 100)
 				}
 			}
+			// Добавляем обработчик клика
 			toggleLink.addEventListener('click', handleToggle)
+			// Добавляем обработчик для touch-событий (на мобильных)
 			toggleLink.addEventListener('touchend', handleToggle)
 		}
 	})
