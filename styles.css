@@ -556,11 +556,15 @@ main {
 	.dropdown-menu li a {
 		padding: 12px 17px;
 	}
-	/* .dropdown-toggle:focus {
-    outline: none;
-    box-shadow: none;
-    -webkit-tap-highlight-color: transparent;
-  } */
+	.dropdown-toggle:focus {
+		outline: none;
+		box-shadow: none;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.dropdown .dropdown-toggle:focus {
+		outline: none;
+		color: var(--text-color);
+	}
 	.menu-toggle {
 		display: flex;
 	}
