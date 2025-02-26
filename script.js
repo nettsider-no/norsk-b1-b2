@@ -1,19 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
-	;('use strict')
+	'use strict'
 
 	// Обработчики для отключения выделения текста за пределами <main>
 	document.addEventListener('mousedown', e => {
-		// Если событие НЕ происходит внутри <main>
 		if (!e.target.closest('main')) {
 			document.body.classList.add('no-select')
 		}
 	})
-
 	document.addEventListener('mouseup', () => {
 		document.body.classList.remove('no-select')
 	})
-
-	// (Опционально) Если курсор уходит с окна — тоже сброс
 	document.addEventListener('mouseleave', () => {
 		document.body.classList.remove('no-select')
 	})
@@ -44,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
 	const toggleButtons = document.querySelectorAll('.toggle-btn')
 	toggleButtons.forEach((button, index) => {
 		const hiddenContent = button.previousElementSibling
-		// Если ранее была установлена расширенная секция – восстановление состояния
 		if (
 			hiddenContent &&
 			sessionStorage.getItem('toggleState-' + index) === 'expanded'
@@ -57,17 +52,13 @@ document.addEventListener('DOMContentLoaded', () => {
 			const content = this.previousElementSibling
 			if (!content) return
 
-			// Если секция развёрнута, то собираемся её свернуть
 			if (content.style.maxHeight && content.style.maxHeight !== '0px') {
-				// Если для этой кнопки была сохранена позиция скролла, используем её
 				let previousScroll = this.dataset.previousScroll
-
 				content.style.maxHeight = '0'
 				this.textContent = 'Показать больше'
 				sessionStorage.setItem('toggleState-' + index, 'collapsed')
 				this.blur()
 
-				// После окончания перехода вернуть пользователя к сохранённой позиции
 				content.addEventListener('transitionend', function handler(e) {
 					if (e.propertyName === 'max-height') {
 						if (previousScroll) {
@@ -79,10 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 						content.removeEventListener('transitionend', handler)
 					}
 				})
-				// Удаляем сохранённую позицию
 				delete this.dataset.previousScroll
 			} else {
-				// При разворачивании сохраняем текущую позицию скролла
 				this.dataset.previousScroll = window.pageYOffset
 				content.style.maxHeight = content.scrollHeight + 'px'
 				this.textContent = 'Скрыть'
@@ -98,16 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
 		navLinks.classList.toggle('active')
 	})
 
+	// Обработка выпадающего меню для мобильной версии
 	const dropdowns = document.querySelectorAll('.dropdown')
 	dropdowns.forEach(dropdown => {
 		const toggleLink = dropdown.querySelector('.dropdown-toggle')
 		if (toggleLink) {
 			const handleToggle = e => {
-				e.preventDefault() // предотвращаем переход по ссылке
+				e.preventDefault()
 				const wasOpen = dropdown.classList.contains('open')
 				dropdown.classList.toggle('open')
 				if (wasOpen) {
-					// Если меню закрывается, сбрасываем фокус и цвет через 100 мс
+					// При закрытии меню сбрасываем фокус и устанавливаем стандартный цвет
 					setTimeout(() => {
 						toggleLink.blur()
 						toggleLink.style.color = getComputedStyle(
@@ -115,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 						).getPropertyValue('--text-color')
 					}, 100)
 				} else {
-					// Если меню открывается, устанавливаем цвет как hover-эффект (например, primary-color)
+					// При открытии устанавливаем hover-эффект
 					toggleLink.style.color = getComputedStyle(
 						document.documentElement
 					).getPropertyValue('--primary-color')
@@ -126,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// Добавляем флаг, чтобы параллакс работал только при зажатой мыши
+	// Флаг, чтобы параллакс работал только при зажатой мыши
 	let isMouseDown = false
 	document.addEventListener('mousedown', () => {
 		isMouseDown = true
@@ -137,7 +127,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 	// Функция параллакса фона
 	const parallaxHandler = e => {
-		// Если курсор находится внутри <main>, не применять параллакс
 		if (e.target.closest('main')) return
 		if (!isMouseDown) return
 
@@ -148,13 +137,15 @@ document.addEventListener('DOMContentLoaded', () => {
 		document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
 	}
 
+	// Сохраняем touchmove-обработчик в переменной для последующего удаления
+	let touchMoveHandler = null
+
 	// Функция для включения или отключения параллакса в зависимости от ширины окна
 	const setupParallax = () => {
 		if (window.innerWidth > 768) {
 			document.addEventListener('mousemove', parallaxHandler)
-			document.addEventListener(
-				'touchmove',
-				e => {
+			if (!touchMoveHandler) {
+				touchMoveHandler = e => {
 					if (e.touches.length === 1) {
 						const touch = e.touches[0]
 						const x = touch.clientX
@@ -163,34 +154,36 @@ document.addEventListener('DOMContentLoaded', () => {
 						const moveY = 50 + (y / window.innerHeight - 0.5) * 5
 						document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
 					}
-				},
-				{ passive: true }
-			)
+				}
+			}
+			document.addEventListener('touchmove', touchMoveHandler, {
+				passive: true,
+			})
 		} else {
-			// Для мобильных устройств фон остаётся фиксированным по центру
 			document.body.style.backgroundPosition = '50% 50%'
 			document.removeEventListener('mousemove', parallaxHandler)
+			if (touchMoveHandler) {
+				document.removeEventListener('touchmove', touchMoveHandler, {
+					passive: true,
+				})
+			}
 		}
 	}
 
-	// Запуск параллакса с задержкой 2 сек (2000 мс)
 	setTimeout(() => {
 		setupParallax()
 	}, 2000)
 
-	// Обновляем настройки параллакса при изменении размеров окна
 	window.addEventListener('resize', () => {
 		setupParallax()
 	})
-	// --- Новый блок: Восстановление скролла после закрытия Lightbox ---
-	// Сохраняем позицию скролла при открытии Lightbox
+
+	// --- Восстановление скролла после закрытия Lightbox ---
 	document.querySelectorAll('a[data-lightbox]').forEach(anchor => {
 		anchor.addEventListener('click', () => {
 			window.lightboxScrollPosition = window.pageYOffset
 		})
 	})
-
-	// Восстанавливаем позицию скролла при закрытии Lightbox (нажатие на элемент с классом .lb-close)
 	document.addEventListener('click', e => {
 		if (e.target.closest('.lb-close')) {
 			setTimeout(() => {
