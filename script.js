@@ -105,17 +105,20 @@ document.addEventListener('DOMContentLoaded', () => {
 		if (toggleLink) {
 			const handleToggle = e => {
 				e.preventDefault() // предотвращаем переход по ссылке
+				const wasOpen = dropdown.classList.contains('open')
 				dropdown.classList.toggle('open')
-				// Если меню закрывается, через 100 мс снимаем фокус с кнопки
-				if (!dropdown.classList.contains('open')) {
+				// Если меню закрывается, через 100 мс сбрасываем фокус и цвет кнопки
+				if (wasOpen) {
 					setTimeout(() => {
 						toggleLink.blur()
+						// Сброс цвета на исходный (берем из CSS-переменной)
+						toggleLink.style.color = getComputedStyle(
+							document.documentElement
+						).getPropertyValue('--text-color')
 					}, 100)
 				}
 			}
-			// Добавляем обработчик клика
 			toggleLink.addEventListener('click', handleToggle)
-			// Добавляем обработчик для touch-событий (на мобильных)
 			toggleLink.addEventListener('touchend', handleToggle)
 		}
 	})

@@ -142,6 +142,7 @@ a {
 }
 .nav-links li .dropdown-toggle {
 	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
 }
 .dropdown-menu {
 	position: absolute;
@@ -823,14 +824,4 @@ h1.animate__animated.animate__fadeInDown.sinonims {
 p.animate__animated.animate__fadeInDown {
 	color: #fff !important;
 	opacity: 0.9 !important;
-}
-
-@media (hover: none) {
-  /* Для устройств без hover — сбрасываем фокусное состояние у выпадающего меню */
-  .dropdown-toggle:focus {
-    outline: none;
-    box-shadow: none;
-    background: none;
-    color: var(--text-color);
-  }
 }
