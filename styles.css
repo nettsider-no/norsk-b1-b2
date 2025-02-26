@@ -554,9 +554,6 @@ main {
 
 /* До 1200px */
 @media (max-width: 1232px) {
-	body {
-		background-attachment: fixed;
-	}
 	.dropdown-menu li a {
 		padding: 12px 17px;
 	}
@@ -630,6 +627,14 @@ main {
 	}
 	.nav-links li.dropdown.open .dropdown-menu {
 		display: block;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	body {
+		background-attachment: scroll !important;
+		background-position: 50% 50% !important;
+		background-size: cover; /* Убедитесь, что фон занимает всю область */
 	}
 }
 
