@@ -1,19 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 	'use strict'
 
-	// Обработчики для отключения выделения текста за пределами <main>
-	document.addEventListener('mousedown', e => {
-		if (!e.target.closest('main')) {
-			document.body.classList.add('no-select')
-		}
-	})
-	document.addEventListener('mouseup', () => {
-		document.body.classList.remove('no-select')
-	})
-	document.addEventListener('mouseleave', () => {
-		document.body.classList.remove('no-select')
-	})
-
 	// Анимация появления секций при прокрутке
 	const categories = document.querySelectorAll('.category')
 	categories.forEach(category => {
@@ -116,63 +103,9 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	// Флаг, чтобы параллакс работал только при зажатой мыши
-	let isMouseDown = false
-	document.addEventListener('mousedown', () => {
-		isMouseDown = true
-	})
-	document.addEventListener('mouseup', () => {
-		isMouseDown = false
-	})
+	
 
-	// Функция параллакса фона
-	const parallaxHandler = e => {
-		if (e.target.closest('main')) return
-		if (!isMouseDown) return
-
-		const x = e.clientX
-		const y = e.clientY
-		const moveX = 50 + (x / window.innerWidth - 0.5) * 5
-		const moveY = 50 + (y / window.innerHeight - 0.5) * 5
-		document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
-	}
-
-	// Сохраняем touchmove-обработчик в переменной для последующего удаления
-	let touchMoveHandler = null
-
-	// Функция для включения или отключения параллакса в зависимости от ширины окна
-	const setupParallax = () => {
-		if (window.innerWidth > 768) {
-			document.addEventListener('mousemove', parallaxHandler)
-			if (!touchMoveHandler) {
-				touchMoveHandler = e => {
-					if (e.touches.length === 1) {
-						const touch = e.touches[0]
-						const x = touch.clientX
-						const y = touch.clientY
-						const moveX = 50 + (x / window.innerWidth - 0.5) * 5
-						const moveY = 50 + (y / window.innerHeight - 0.5) * 5
-						document.body.style.backgroundPosition = `${moveX}% ${moveY}%`
-					}
-				}
-			}
-			document.addEventListener('touchmove', touchMoveHandler, {
-				passive: true,
-			})
-		} else {
-			document.body.style.backgroundPosition = '50% 50%'
-			document.removeEventListener('mousemove', parallaxHandler)
-			if (touchMoveHandler) {
-				document.removeEventListener('touchmove', touchMoveHandler, {
-					passive: true,
-				})
-			}
-		}
-	}
-
-	setTimeout(() => {
-		setupParallax()
-	}, 2000)
+	
 
 	window.addEventListener('resize', () => {
 		setupParallax()

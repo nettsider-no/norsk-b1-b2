@@ -46,13 +46,6 @@ body::before {
 	z-index: -1;
 }
 
-.no-select {
-	-webkit-user-select: none !important;
-	-moz-user-select: none !important;
-	-ms-user-select: none !important;
-	user-select: none !important;
-}
-
 a {
 	color: var(--text-color);
 	text-decoration: none;
@@ -554,10 +547,6 @@ main {
 
 /* До 1200px */
 @media (max-width: 1232px) {
-	body {
-		background: url('images/bgmob-min.png') no-repeat center center/cover;
-		background-attachment: scroll; /* Фиксированное прикрепление заменяем на скролл */
-	}
 	.dropdown-menu li a {
 		padding: 12px 17px;
 	}
