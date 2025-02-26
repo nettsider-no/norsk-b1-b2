@@ -142,7 +142,6 @@ a {
 }
 .nav-links li .dropdown-toggle {
 	cursor: pointer;
-	-webkit-tap-highlight-color: transparent;
 }
 .dropdown-menu {
 	position: absolute;
