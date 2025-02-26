@@ -554,6 +554,9 @@ main {
 
 /* До 1200px */
 @media (max-width: 1232px) {
+	body {
+		background-size: auto;
+	}
 	.dropdown-menu li a {
 		padding: 12px 17px;
 	}
@@ -630,14 +633,6 @@ main {
 	}
 }
 
-@media only screen and (max-width: 768px) {
-	body {
-		background-attachment: scroll !important;
-		background-position: 50% 50% !important;
-		background-size: cover; /* Убедитесь, что фон занимает всю область */
-	}
-}
-
 /* Мобильное меню: до 1100px */
 
 /* До 900px */
@@ -662,8 +657,6 @@ main {
 		font-size: 1.4rem;
 	}
 }
-
-/* До 768px: отключаем фиксированное фоновое прикрепление */
 
 /* До 700px */
 @media (max-width: 700px) {
