@@ -555,7 +555,8 @@ main {
 /* До 1200px */
 @media (max-width: 1232px) {
 	body {
-		background-size: auto;
+		background: url('images/bgmob-min.png') no-repeat center center/cover;
+		background-attachment: scroll; /* Фиксированное прикрепление заменяем на скролл */
 	}
 	.dropdown-menu li a {
 		padding: 12px 17px;
