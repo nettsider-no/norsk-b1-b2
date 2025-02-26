@@ -828,3 +828,10 @@ main {
 	}
 }
 
+.synonyms-container h1.animate__animated.animate__fadeInDown.sinonims,
+.site-header h1.animate__animated.animate__fadeInDown {
+	color: var(--text-color) !important;
+}
+
+
+
