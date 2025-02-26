@@ -103,14 +103,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		}
 	})
 
-	
-
-	
-
-	window.addEventListener('resize', () => {
-		setupParallax()
-	})
-
 	// --- Восстановление скролла после закрытия Lightbox ---
 	document.querySelectorAll('a[data-lightbox]').forEach(anchor => {
 		anchor.addEventListener('click', () => {
