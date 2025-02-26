@@ -554,6 +554,9 @@ main {
 
 /* До 1200px */
 @media (max-width: 1232px) {
+	body {
+		background-attachment: scroll;
+	}
 	.dropdown-menu li a {
 		padding: 12px 17px;
 	}
