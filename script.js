@@ -98,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		navLinks.classList.toggle('active')
 	})
 
-	// Обработка выпадающего меню для мобильной версии
 	const dropdowns = document.querySelectorAll('.dropdown')
 	dropdowns.forEach(dropdown => {
 		const toggleLink = dropdown.querySelector('.dropdown-toggle')
@@ -107,15 +106,19 @@ document.addEventListener('DOMContentLoaded', () => {
 				e.preventDefault() // предотвращаем переход по ссылке
 				const wasOpen = dropdown.classList.contains('open')
 				dropdown.classList.toggle('open')
-				// Если меню закрывается, через 100 мс сбрасываем фокус и цвет кнопки
 				if (wasOpen) {
+					// Если меню закрывается, сбрасываем фокус и цвет через 100 мс
 					setTimeout(() => {
 						toggleLink.blur()
-						// Сброс цвета на исходный (берем из CSS-переменной)
 						toggleLink.style.color = getComputedStyle(
 							document.documentElement
 						).getPropertyValue('--text-color')
 					}, 100)
+				} else {
+					// Если меню открывается, устанавливаем цвет как hover-эффект (например, primary-color)
+					toggleLink.style.color = getComputedStyle(
+						document.documentElement
+					).getPropertyValue('--primary-color')
 				}
 			}
 			toggleLink.addEventListener('click', handleToggle)
