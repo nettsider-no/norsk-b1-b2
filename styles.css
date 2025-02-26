@@ -825,10 +825,12 @@ p.animate__animated.animate__fadeInDown {
 	opacity: 0.9 !important;
 }
 
-@media (pointer: coarse) {
-  .dropdown-toggle:focus {
-    outline: none;
-    -webkit-tap-highlight-color: transparent;
-    background: none;
-  }
+@media (hover: none) {
+	/* Сбрасываем стили фокуса у кнопки, когда выпадающее меню закрыто */
+	.dropdown:not(.open) .dropdown-toggle:focus {
+		outline: none;
+		background: none;
+		box-shadow: none;
+		color: var(--text-color);
+	}
 }
