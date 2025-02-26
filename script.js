@@ -98,21 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
 		navLinks.classList.toggle('active')
 	})
 
-	// Обработка выпадающего меню для мобильной версии
 	const dropdowns = document.querySelectorAll('.dropdown')
 	dropdowns.forEach(dropdown => {
 		const toggleLink = dropdown.querySelector('.dropdown-toggle')
 		if (toggleLink) {
-			// Определяем, какое событие использовать: touchend, если доступно, иначе click
-			const eventName = 'ontouchstart' in window ? 'touchend' : 'click'
-			toggleLink.addEventListener(eventName, e => {
+			// Используем событие click и touchend
+			const handleToggle = e => {
 				e.preventDefault() // предотвращаем переход по ссылке
 				dropdown.classList.toggle('open')
-				// Через 50 мс снимаем фокус, чтобы на сенсорных устройствах не оставалась подсветка
-				setTimeout(() => {
-					toggleLink.blur()
-				}, 50)
-			})
+				// Если меню закрывается, через 50 мс принудительно снимаем фокус
+				if (!dropdown.classList.contains('open')) {
+					setTimeout(() => {
+						toggleLink.blur()
+					}, 50)
+				}
+			}
+			toggleLink.addEventListener('click', handleToggle)
+			toggleLink.addEventListener('touchend', handleToggle)
 		}
 	})
 

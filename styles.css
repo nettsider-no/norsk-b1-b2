@@ -826,9 +826,8 @@ p.animate__animated.animate__fadeInDown {
 }
 
 @media (hover: none) and (pointer: coarse) {
-	.dropdown-toggle:focus {
-		outline: none;
-		box-shadow: none;
-		-webkit-tap-highlight-color: transparent;
-	}
+  .dropdown-toggle {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
 }
