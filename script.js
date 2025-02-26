@@ -103,13 +103,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	dropdowns.forEach(dropdown => {
 		const toggleLink = dropdown.querySelector('.dropdown-toggle')
 		if (toggleLink) {
-			toggleLink.addEventListener('click', e => {
+			// Определяем, какое событие использовать: touchend, если доступно, иначе click
+			const eventName = 'ontouchstart' in window ? 'touchend' : 'click'
+			toggleLink.addEventListener(eventName, e => {
 				e.preventDefault() // предотвращаем переход по ссылке
 				dropdown.classList.toggle('open')
-				e.currentTarget.blur()
-			})
-			toggleLink.addEventListener('touchend', e => {
-				e.currentTarget.blur()
+				// Через 50 мс снимаем фокус, чтобы на сенсорных устройствах не оставалась подсветка
+				setTimeout(() => {
+					toggleLink.blur()
+				}, 50)
 			})
 		}
 	})
