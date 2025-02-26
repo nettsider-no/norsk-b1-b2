@@ -561,10 +561,6 @@ main {
 		box-shadow: none;
 		-webkit-tap-highlight-color: transparent;
 	}
-	.dropdown .dropdown-toggle:focus {
-		outline: none;
-		color: var(--text-color);
-	}
 	.menu-toggle {
 		display: flex;
 	}
@@ -827,4 +823,12 @@ h1.animate__animated.animate__fadeInDown.sinonims {
 p.animate__animated.animate__fadeInDown {
 	color: #fff !important;
 	opacity: 0.9 !important;
+}
+
+@media (hover: none) and (pointer: coarse) {
+	.dropdown-toggle:focus {
+		outline: none;
+		box-shadow: none;
+		-webkit-tap-highlight-color: transparent;
+	}
 }
